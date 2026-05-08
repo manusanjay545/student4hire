@@ -41,7 +41,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-muted/10">
+    <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#013914]">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -56,56 +56,51 @@ function HeroSection() {
             transition={{ delay: 0.2 }}
             className="mb-8 inline-flex"
           >
-            <Badge className="px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20 gap-2">
+            <Badge className="px-4 py-2 text-sm bg-white/10 text-white border-white/20 gap-2">
               <Sparkles className="w-3.5 h-3.5" />
               The future of student freelancing is here
             </Badge>
           </motion.div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-foreground">
-            Where Student Talent{' '}
-            <br className="hidden sm:block" />
-            Meets{' '}
-            <span className="text-primary">Opportunity</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-white">
+            Find the right <i className="font-serif font-light text-primary">student freelance</i> service, right away
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-10">
             Discover exceptional student freelancers for your next project. From code to design,
-            find fresh perspectives and cutting-edge skills at student-friendly rates.
+            find fresh perspectives and cutting-edge skills.
           </p>
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-10">
-            <div className="relative group">
-              <div className="relative flex items-center bg-white border border-border shadow-md rounded-xl p-1.5">
-                <Search className="w-5 h-5 text-muted-foreground ml-4 shrink-0" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder='Try "React developer", "UI designer", "video editor"...'
-                  className="flex-1 bg-transparent px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
-                />
-                <Button
-                  type="submit"
-                  className="bg-primary hover:bg-primary/90 text-white font-semibold border-0 px-6 rounded-lg"
-                >
-                  Search
-                </Button>
-              </div>
+            <div className="relative flex items-center bg-white rounded-lg p-1 w-full max-w-3xl">
+              <Search className="w-5 h-5 text-muted-foreground ml-3 shrink-0" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder='Search for any service...'
+                className="flex-1 bg-transparent px-3 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+              />
+              <Button
+                type="submit"
+                className="bg-primary hover:bg-[#19a463] text-white font-bold text-base border-0 px-8 py-6 rounded-md h-auto"
+              >
+                <Search className="w-5 h-5" />
+              </Button>
             </div>
           </form>
 
           {/* Trending Tags */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-            <span className="text-xs text-muted-foreground mr-1">Trending:</span>
-            {['React', 'UI/UX', 'Python', 'Video Editing', 'Next.js', 'Figma'].map((tag) => (
+            <span className="text-sm font-semibold text-white mr-1">Popular:</span>
+            {['Website Design', 'WordPress', 'Logo Design', 'Video Editing'].map((tag) => (
               <Link key={tag} href={`/explore?q=${tag}`}>
                 <Badge
-                  variant="secondary"
-                  className="cursor-pointer bg-muted text-foreground hover:bg-gray-200 transition-colors text-xs"
+                  variant="outline"
+                  className="cursor-pointer border-white/40 text-white hover:bg-white hover:text-[#013914] transition-colors rounded-full px-4 py-1.5 font-medium"
                 >
                   {tag}
                 </Badge>
@@ -125,11 +120,11 @@ function HeroSection() {
               { value: 5000, suffix: '+', label: 'Projects' },
               { value: 98, suffix: '%', label: 'Satisfaction' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-primary">
+              <div key={stat.label} className="text-center text-white">
+                <div className="text-2xl sm:text-3xl font-bold">
                   <Counter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-xs text-muted-foreground mt-1 font-medium">{stat.label}</p>
+                <p className="text-xs text-white/80 mt-1 font-medium">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -157,17 +152,11 @@ function CategoriesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12"
         >
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-            Categories
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
-            Explore by <span className="text-primary">Category</span>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-2 text-foreground">
+            Explore the marketplace
           </h2>
-          <p className="text-muted-foreground max-w-lg mx-auto">
-            Find the perfect student freelancer across dozens of creative and technical categories.
-          </p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -228,18 +217,13 @@ function FeaturedSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex items-center justify-between mb-12"
+          className="flex items-center justify-between mb-8"
         >
-          <div>
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              Featured
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
-              Top <span className="text-primary">Student Talent</span>
-            </h2>
-          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+            Top Student Talent
+          </h2>
           <Link href="/explore">
-            <Button variant="ghost" className="gap-2 text-muted-foreground hover:text-white">
+            <Button variant="ghost" className="gap-2 text-foreground hover:bg-muted font-medium">
               View all <ArrowRight className="w-4 h-4" />
             </Button>
           </Link>
@@ -332,11 +316,10 @@ function HowItWorksSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12 text-center"
         >
-          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">How It Works</Badge>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
-            Three Steps to <span className="text-primary">Success</span>
+            Three Steps to Success
           </h2>
         </motion.div>
 

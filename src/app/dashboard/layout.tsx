@@ -118,7 +118,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
             <Sparkles className="w-3.5 h-3.5 text-white" />
           </div>
-          <span className="text-sm font-bold">Studentlance</span>
+          <span className="text-sm font-bold text-foreground">Student4Hire</span>
         </Link>
         <Link href="/dashboard/settings">
           <Avatar className="w-8 h-8">

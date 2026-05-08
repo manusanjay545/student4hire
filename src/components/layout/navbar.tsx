@@ -52,12 +52,9 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-foreground">
-                Student<span className="text-primary">lance</span>
+            <Link href="/" className="flex items-center shrink-0">
+              <span className="text-2xl font-black tracking-tighter text-foreground">
+                Student4Hire<span className="text-primary">.</span>
               </span>
             </Link>
 

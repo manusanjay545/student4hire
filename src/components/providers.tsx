@@ -20,7 +20,7 @@ function AuthInitializer({ children }: { children: React.ReactNode }) {
             <div className="absolute inset-0 rounded-full border-2 border-violet-500/20" />
             <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-violet-500 animate-spin" />
           </div>
-          <p className="text-sm text-muted-foreground animate-pulse">Loading Studentlance...</p>
+          <p className="text-sm text-muted-foreground animate-pulse">Loading Student4Hire...</p>
         </div>
       </div>
     );

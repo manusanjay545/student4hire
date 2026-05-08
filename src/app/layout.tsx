@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Studentlance — Freelance Marketplace for Student Talent",
+  title: "Student4Hire — Freelance Marketplace for Student Talent",
   description:
-    "Discover and hire talented students for your next project. Studentlance connects college students with clients seeking fresh creative talent in development, design, and more.",
+    "Discover and hire talented students for your next project. Student4Hire connects college students with clients seeking fresh creative talent in development, design, and more.",
   keywords: ["freelance", "students", "hire", "portfolio", "marketplace", "college"],
 };
 

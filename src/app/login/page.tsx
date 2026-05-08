@@ -76,7 +76,7 @@ function LoginForm() {
             </Link>
             <h1 className="text-2xl font-bold mb-2 text-foreground">Welcome back</h1>
             <p className="text-sm text-muted-foreground">
-              Sign in to your Studentlance account
+              Sign in to your Student4Hire account
             </p>
           </div>
 

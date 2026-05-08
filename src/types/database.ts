@@ -1,5 +1,5 @@
 // ============================================================
-// Studentlance — TypeScript types matching Supabase schema
+// Student4Hire — TypeScript types matching Supabase schema
 // ============================================================
 
 export type UserRole = 'student' | 'client' | 'admin';
