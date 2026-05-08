@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/lib/stores/auth-store';
 
 /* ─── Animated counter ─── */
 function Counter({ value, suffix = '' }: { value: number; suffix?: string }) {
@@ -385,6 +386,8 @@ function HowItWorksSection() {
 
 /* ─── CTA Section ─── */
 function CTASection() {
+  const { user } = useAuthStore();
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(139,92,246,0.15)_0%,_transparent_60%)]" />
@@ -402,16 +405,26 @@ function CTASection() {
             Join thousands of students and clients already building amazing things together.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/signup?role=student">
-              <Button size="lg" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-8 shadow-lg shadow-violet-500/20 w-full sm:w-auto">
-                Join as Student
-              </Button>
-            </Link>
-            <Link href="/signup?role=client">
-              <Button size="lg" variant="outline" className="border-white/10 hover:bg-white/5 px-8 w-full sm:w-auto">
-                Hire a Student
-              </Button>
-            </Link>
+            {user ? (
+              <Link href="/dashboard">
+                <Button size="lg" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-8 shadow-lg shadow-violet-500/20 w-full sm:w-auto">
+                  Go to Dashboard <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/signup?role=student">
+                  <Button size="lg" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-8 shadow-lg shadow-violet-500/20 w-full sm:w-auto">
+                    Join as Student
+                  </Button>
+                </Link>
+                <Link href="/signup?role=client">
+                  <Button size="lg" variant="outline" className="border-white/10 hover:bg-white/5 px-8 w-full sm:w-auto">
+                    Hire a Student
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </motion.div>
       </div>
