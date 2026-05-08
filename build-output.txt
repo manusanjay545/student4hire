@@ -1,0 +1,199 @@
+﻿Γû▓ Next.js 16.2.6 (Turbopack)
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+System.Management.Automation.RemoteException
+> Build error occurred
+Error: Turbopack build failed with 7 errors:
+./src/app/profile/[username]/page.tsx:7:1
+Export Github doesn't exist in target module
+  [90m 5 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m;
+  [90m 6 |[0m [36mimport[0m { useState, useEffect } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mMapPin[0m, [33mGlobe[0m, [33mGithub[0m, [33mLinkedin[0m, [33mMail[0m, [33mStar[0m, [33mCalendar[0m, [33mClock[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mHeart[0m, [33mMessageSquare[0m, [33mExternalLink[0m, [33mPlay[0m, [33mX[0m, [33mChevronLeft[0m, [33mChevronRight[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mCheckCircle[0m, [33mBriefcase[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m'@/components/ui/button'[0m;
+  [90m13 |[0m [36mimport[0m { [33mBadge[0m } [36mfrom[0m [32m'@/components/ui/badge'[0m;
+  [90m14 |[0m [36mimport[0m { [33mAvatar[0m, [33mAvatarImage[0m, [33mAvatarFallback[0m } [36mfrom[0m [32m'@/components/ui/avatar'[0m;
+System.Management.Automation.RemoteException
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import traces:
+  Client Component Browser:
+    ./src/app/profile/[username]/page.tsx [Client Component Browser]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+  Client Component SSR:
+    ./src/app/profile/[username]/page.tsx [Client Component SSR]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/app/profile/[username]/page.tsx:7:1
+Export Github doesn't exist in target module
+  [90m 5 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m;
+  [90m 6 |[0m [36mimport[0m { useState, useEffect } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mMapPin[0m, [33mGlobe[0m, [33mGithub[0m, [33mLinkedin[0m, [33mMail[0m, [33mStar[0m, [33mCalendar[0m, [33mClock[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mHeart[0m, [33mMessageSquare[0m, [33mExternalLink[0m, [33mPlay[0m, [33mX[0m, [33mChevronLeft[0m, [33mChevronRight[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mCheckCircle[0m, [33mBriefcase[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m'@/components/ui/button'[0m;
+  [90m13 |[0m [36mimport[0m { [33mBadge[0m } [36mfrom[0m [32m'@/components/ui/badge'[0m;
+  [90m14 |[0m [36mimport[0m { [33mAvatar[0m, [33mAvatarImage[0m, [33mAvatarFallback[0m } [36mfrom[0m [32m'@/components/ui/avatar'[0m;
+System.Management.Automation.RemoteException
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import traces:
+  Client Component Browser:
+    ./src/app/profile/[username]/page.tsx [Client Component Browser]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+  Client Component SSR:
+    ./src/app/profile/[username]/page.tsx [Client Component SSR]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/components/layout/footer.tsx:2:1
+Export Github doesn't exist in target module
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mSparkles[0m, [33mGithub[0m, [33mTwitter[0m, [33mLinkedin[0m, [33mMail[0m, [33mHeart[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mconst[0m footerLinks = {
+  [90m5 |[0m   [33mPlatform[0m: [
+System.Management.Automation.RemoteException
+The export Github was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-rsc] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import trace:
+  Server Component:
+    ./src/components/layout/footer.tsx
+    ./src/app/layout.tsx
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/app/profile/[username]/page.tsx:7:1
+Export Linkedin doesn't exist in target module
+  [90m 5 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m;
+  [90m 6 |[0m [36mimport[0m { useState, useEffect } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mMapPin[0m, [33mGlobe[0m, [33mGithub[0m, [33mLinkedin[0m, [33mMail[0m, [33mStar[0m, [33mCalendar[0m, [33mClock[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mHeart[0m, [33mMessageSquare[0m, [33mExternalLink[0m, [33mPlay[0m, [33mX[0m, [33mChevronLeft[0m, [33mChevronRight[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mCheckCircle[0m, [33mBriefcase[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m'@/components/ui/button'[0m;
+  [90m13 |[0m [36mimport[0m { [33mBadge[0m } [36mfrom[0m [32m'@/components/ui/badge'[0m;
+  [90m14 |[0m [36mimport[0m { [33mAvatar[0m, [33mAvatarImage[0m, [33mAvatarFallback[0m } [36mfrom[0m [32m'@/components/ui/avatar'[0m;
+System.Management.Automation.RemoteException
+The export Linkedin was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-client] (ecmascript).
+Did you mean to import Link?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import traces:
+  Client Component Browser:
+    ./src/app/profile/[username]/page.tsx [Client Component Browser]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+  Client Component SSR:
+    ./src/app/profile/[username]/page.tsx [Client Component SSR]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/app/profile/[username]/page.tsx:7:1
+Export Linkedin doesn't exist in target module
+  [90m 5 |[0m [36mimport[0m { useParams } [36mfrom[0m [32m'next/navigation'[0m;
+  [90m 6 |[0m [36mimport[0m { useState, useEffect } [36mfrom[0m [32m'react'[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 8 |[0m   [33mMapPin[0m, [33mGlobe[0m, [33mGithub[0m, [33mLinkedin[0m, [33mMail[0m, [33mStar[0m, [33mCalendar[0m, [33mClock[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 9 |[0m   [33mHeart[0m, [33mMessageSquare[0m, [33mExternalLink[0m, [33mPlay[0m, [33mX[0m, [33mChevronLeft[0m, [33mChevronRight[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m10 |[0m   [33mCheckCircle[0m, [33mBriefcase[0m,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m11 |[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m { [33mButton[0m } [36mfrom[0m [32m'@/components/ui/button'[0m;
+  [90m13 |[0m [36mimport[0m { [33mBadge[0m } [36mfrom[0m [32m'@/components/ui/badge'[0m;
+  [90m14 |[0m [36mimport[0m { [33mAvatar[0m, [33mAvatarImage[0m, [33mAvatarFallback[0m } [36mfrom[0m [32m'@/components/ui/avatar'[0m;
+System.Management.Automation.RemoteException
+The export Linkedin was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-ssr] (ecmascript).
+Did you mean to import Link?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import traces:
+  Client Component Browser:
+    ./src/app/profile/[username]/page.tsx [Client Component Browser]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+  Client Component SSR:
+    ./src/app/profile/[username]/page.tsx [Client Component SSR]
+    ./src/app/profile/[username]/page.tsx [Server Component]
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/components/layout/footer.tsx:2:1
+Export Linkedin doesn't exist in target module
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mSparkles[0m, [33mGithub[0m, [33mTwitter[0m, [33mLinkedin[0m, [33mMail[0m, [33mHeart[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mconst[0m footerLinks = {
+  [90m5 |[0m   [33mPlatform[0m: [
+System.Management.Automation.RemoteException
+The export Linkedin was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-rsc] (ecmascript).
+Did you mean to import Link?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import trace:
+  Server Component:
+    ./src/components/layout/footer.tsx
+    ./src/app/layout.tsx
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./src/components/layout/footer.tsx:2:1
+Export Twitter doesn't exist in target module
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m'next/link'[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mSparkles[0m, [33mGithub[0m, [33mTwitter[0m, [33mLinkedin[0m, [33mMail[0m, [33mHeart[0m } [36mfrom[0m [32m'lucide-react'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m
+  [90m4 |[0m [36mconst[0m footerLinks = {
+  [90m5 |[0m   [33mPlatform[0m: [
+System.Management.Automation.RemoteException
+The export Twitter was not found in module [project]/node_modules/lucide-react/dist/esm/lucide-react.mjs [app-rsc] (ecmascript).
+Did you mean to import Timer?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+System.Management.Automation.RemoteException
+Import trace:
+  Server Component:
+    ./src/components/layout/footer.tsx
+    ./src/app/layout.tsx
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+    at <unknown> (./src/app/profile/[username]/page.tsx:7:1)
+    at <unknown> (./src/app/profile/[username]/page.tsx:7:1)
+    at <unknown> (./src/components/layout/footer.tsx:2:1)
+    at <unknown> (./src/app/profile/[username]/page.tsx:7:1)
+    at <unknown> (./src/app/profile/[username]/page.tsx:7:1)
+    at <unknown> (./src/components/layout/footer.tsx:2:1)
+    at <unknown> (./src/components/layout/footer.tsx:2:1)

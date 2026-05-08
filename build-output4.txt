@@ -1,0 +1,25 @@
+﻿Γû▓ Next.js 16.2.6 (Turbopack)
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 5.2s
+  Running TypeScript ...
+Failed to type check.
+System.Management.Automation.RemoteException
+./src/app/dashboard/settings/page.tsx:28:5
+Type error: Type 'Resolver<{ full_name: string; username: string; bio?: string | undefined; college_name?: string | undefined; location?: string | undefined; hourly_rate?: unknown; website?: string | undefined; github?: string | undefined; linkedin?: string | undefined; skills?: string[] | undefined; categories?: string[] | undefined...' is not assignable to type 'Resolver<{ full_name: string; username: string; bio?: string | undefined; college_name?: string | undefined; location?: string | undefined; hourly_rate?: number | undefined; website?: string | undefined; github?: string | undefined; linkedin?: string | undefined; skills?: string[] | undefined; categories?: string[] ...'.
+  Types of parameters 'options' and 'options' are incompatible.
+    Type 'ResolverOptions<{ full_name: string; username: string; bio?: string | undefined; college_name?: string | undefined; location?: string | undefined; hourly_rate?: number | undefined; website?: string | undefined; github?: string | undefined; linkedin?: string | undefined; skills?: string[] | undefined; categories?: st...' is not assignable to type 'ResolverOptions<{ full_name: string; username: string; bio?: string | undefined; college_name?: string | undefined; location?: string | undefined; hourly_rate?: unknown; website?: string | undefined; github?: string | undefined; linkedin?: string | undefined; skills?: string[] | undefined; categories?: string[] | un...'.
+      Types of property 'names' are incompatible.
+        Type 'string[] | undefined' is not assignable to type '("full_name" | "username" | "bio" | "college_name" | "location" | "hourly_rate" | "website" | "github" | "linkedin" | "skills" | "categories")[] | undefined'.
+          Type 'string[]' is not assignable to type '("full_name" | "username" | "bio" | "college_name" | "location" | "hourly_rate" | "website" | "github" | "linkedin" | "skills" | "categories")[]'.
+            Type 'string' is not assignable to type '"full_name" | "username" | "bio" | "college_name" | "location" | "hourly_rate" | "website" | "github" | "linkedin" | "skills" | "categories"'.
+System.Management.Automation.RemoteException
+  [90m26 |[0m
+  [90m27 |[0m   [36mconst[0m { register, handleSubmit, formState: { errors }, reset } = useForm<[33mProfileInput[0m>({
+[31m[1m>[0m [90m28 |[0m     resolver: zodResolver(profileSchema),
+  [90m   |[0m     [31m[1m^[0m
+  [90m29 |[0m     defaultValues: {
+  [90m30 |[0m       full_name: profile?.full_name || [32m''[0m,
+  [90m31 |[0m       username: profile?.username || [32m''[0m,
+Next.js build worker exited with code: 1 and signal: null

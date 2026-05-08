@@ -1,0 +1,22 @@
+﻿Γû▓ Next.js 16.2.6 (Turbopack)
+
+ΓÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 4.3s
+  Running TypeScript ...
+Failed to type check.
+System.Management.Automation.RemoteException
+./src/app/dashboard/portfolio/page.tsx:153:51
+Type error: Type 'Dispatch<SetStateAction<string>>' is not assignable to type '(value: string | null, eventDetails: SelectRootChangeEventDetails) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string | null' is not assignable to type 'SetStateAction<string>'.
+      Type 'null' is not assignable to type 'SetStateAction<string>'.
+System.Management.Automation.RemoteException
+  [90m151 |[0m               <div>
+  [90m152 |[0m                 <label className=[32m"text-sm font-medium mb-1.5 block"[0m>[33mCategory[0m *</label>
+[31m[1m>[0m [90m153 |[0m                 <[33mSelect[0m required value={category} onValueChange={setCategory}>
+  [90m    |[0m                                                   [31m[1m^[0m
+  [90m154 |[0m                   <[33mSelectTrigger[0m className=[32m"bg-white/5 border-white/10"[0m>
+  [90m155 |[0m                     <[33mSelectValue[0m placeholder=[32m"Select a category"[0m />
+  [90m156 |[0m                   </[33mSelectTrigger[0m>
+Next.js build worker exited with code: 1 and signal: null
