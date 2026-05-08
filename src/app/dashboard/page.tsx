@@ -47,7 +47,7 @@ export default function DashboardHome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
           >
-            <Card className="bg-white/5 border-white/10 glass-card">
+            <Card className="bg-white border border-border shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">
                   {stat.title}
@@ -64,15 +64,15 @@ export default function DashboardHome() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4 bg-white/5 border-white/10 glass-card">
+        <Card className="col-span-4 bg-white border border-border shadow-sm">
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-violet-500/20 flex items-center justify-center text-violet-400">
+                <div key={i} className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                     <MessageSquare className="w-4 h-4" />
                   </div>
                   <div className="flex-1 space-y-1">
@@ -86,22 +86,22 @@ export default function DashboardHome() {
           </CardContent>
         </Card>
 
-        <Card className="col-span-3 bg-white/5 border-white/10 glass-card">
+        <Card className="col-span-3 bg-white border border-border shadow-sm">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-2">
             {profile?.role === 'student' ? (
               <>
-                <Link href="/dashboard/portfolio" className="flex items-center p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-                  <FolderOpen className="w-5 h-5 mr-3 text-cyan-400" />
+                <Link href="/dashboard/portfolio" className="flex items-center p-3 rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border">
+                  <FolderOpen className="w-5 h-5 mr-3 text-primary" />
                   <div className="flex-1">
                     <h4 className="text-sm font-medium">Update Portfolio</h4>
                     <p className="text-xs text-muted-foreground">Add your latest projects</p>
                   </div>
                 </Link>
-                <Link href={`/profile/${profile?.username}`} className="flex items-center p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-                  <Star className="w-5 h-5 mr-3 text-yellow-400" />
+                <Link href={`/profile/${profile?.username}`} className="flex items-center p-3 rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border">
+                  <Star className="w-5 h-5 mr-3 text-primary" />
                   <div className="flex-1">
                     <h4 className="text-sm font-medium">View Public Profile</h4>
                     <p className="text-xs text-muted-foreground">See how clients view you</p>
@@ -110,15 +110,15 @@ export default function DashboardHome() {
               </>
             ) : (
               <>
-                <Link href="/dashboard/projects" className="flex items-center p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-                  <Briefcase className="w-5 h-5 mr-3 text-pink-400" />
+                <Link href="/dashboard/projects" className="flex items-center p-3 rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border">
+                  <Briefcase className="w-5 h-5 mr-3 text-primary" />
                   <div className="flex-1">
                     <h4 className="text-sm font-medium">Post a Project</h4>
                     <p className="text-xs text-muted-foreground">Find the perfect student</p>
                   </div>
                 </Link>
-                <Link href="/explore" className="flex items-center p-3 rounded-lg hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-                  <Users className="w-5 h-5 mr-3 text-violet-400" />
+                <Link href="/explore" className="flex items-center p-3 rounded-lg hover:bg-muted transition-colors border border-transparent hover:border-border">
+                  <Users className="w-5 h-5 mr-3 text-primary" />
                   <div className="flex-1">
                     <h4 className="text-sm font-medium">Browse Talent</h4>
                     <p className="text-xs text-muted-foreground">Search student profiles</p>

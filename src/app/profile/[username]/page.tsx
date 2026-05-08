@@ -30,10 +30,10 @@ function PortfolioCard({ project, onClick }: { project: PortfolioProject; onClic
     <motion.div
       whileHover={{ y: -4 }}
       onClick={onClick}
-      className="glass-card rounded-xl overflow-hidden cursor-pointer group"
+      className="bg-white border border-border shadow-sm rounded-xl overflow-hidden cursor-pointer group"
     >
       {/* Image */}
-      <div className="aspect-[4/3] bg-gradient-to-br from-violet-900/30 to-cyan-900/30 relative overflow-hidden">
+      <div className="aspect-[4/3] bg-muted relative overflow-hidden">
         {project.images?.[0] ? (
           <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         ) : (
@@ -51,7 +51,7 @@ function PortfolioCard({ project, onClick }: { project: PortfolioProject; onClic
       </div>
       {/* Info */}
       <div className="p-4">
-        <h3 className="font-semibold text-sm mb-1 group-hover:text-violet-300 transition-colors truncate">{project.title}</h3>
+        <h3 className="font-semibold text-sm mb-1 group-hover:text-primary text-foreground transition-colors truncate">{project.title}</h3>
         <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{project.description}</p>
         <div className="flex flex-wrap gap-1">
           {project.tags?.slice(0, 3).map((tag) => (
@@ -68,9 +68,9 @@ function PortfolioCard({ project, onClick }: { project: PortfolioProject; onClic
 /* ─── Review Card ─── */
 function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="glass-card rounded-xl p-5">
+    <div className="bg-white border border-border shadow-sm rounded-xl p-5">
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white text-xs font-bold">
+        <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
           {getInitials(review.reviewer?.full_name || 'U')}
         </div>
         <div>
@@ -79,7 +79,7 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
         <div className="ml-auto flex gap-0.5">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-white/10'}`} />
+            <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? 'text-yellow-500 fill-yellow-500' : 'text-gray-200'}`} />
           ))}
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function ProfilePage() {
   const params = useParams();
   const router = useRouter();
   const username = params.username as string;
-  const { user, profile: currentUserProfile, setSession } = useAuthStore();
+  const { user, profile: currentUserProfile } = useAuthStore();
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [portfolio, setPortfolio] = useState<PortfolioProject[]>([]);
@@ -182,9 +182,8 @@ export default function ProfilePage() {
     try {
       const res = await fetch('/api/user/delete', { method: 'DELETE' });
       if (res.ok) {
-        const supabase = createClient();
-        await supabase.auth.signOut();
-        setSession(null);
+        const { signOut } = useAuthStore.getState();
+        await signOut();
         router.push('/');
         router.refresh();
       } else {
@@ -223,31 +222,31 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-2">Profile not found</h1>
+          <h1 className="text-2xl font-bold mb-2 text-foreground">Profile not found</h1>
           <p className="text-muted-foreground mb-6">This user doesn&apos;t exist.</p>
-          <Link href="/explore"><Button className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0">Browse Students</Button></Link>
+          <Link href="/explore"><Button className="bg-primary hover:bg-primary/90 text-white font-semibold">Browse Students</Button></Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="min-h-screen pb-24 bg-muted/10">
       {/* Cover */}
-      <div className="h-48 md:h-56 bg-gradient-to-r from-violet-900/40 via-purple-900/30 to-cyan-900/40 relative">
+      <div className="h-48 md:h-56 bg-primary/10 relative">
         {profile.cover_url && (
           <img src={profile.cover_url} alt="Cover" className="absolute inset-0 w-full h-full object-cover" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-50" />
       </div>
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative">
         {/* Profile Header */}
         <div className="flex flex-col sm:flex-row gap-6 mb-8">
           {/* Avatar */}
-          <Avatar className="w-28 h-28 border-4 border-background shrink-0">
+          <Avatar className="w-28 h-28 border-4 border-background shrink-0 shadow-sm">
             <AvatarImage src={profile.avatar_url || ''} />
-            <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-2xl text-white">
+            <AvatarFallback className="bg-primary text-2xl text-white font-bold">
               {getInitials(profile.full_name)}
             </AvatarFallback>
           </Avatar>
@@ -255,9 +254,9 @@ export default function ProfilePage() {
           {/* Info */}
           <div className="flex-1 pt-2">
             <div className="flex items-center gap-2 flex-wrap mb-1">
-              <h1 className="text-2xl font-bold">{profile.full_name}</h1>
+              <h1 className="text-2xl font-bold text-foreground">{profile.full_name}</h1>
               {profile.verified && (
-                <CheckCircle className="w-5 h-5 text-blue-400 fill-blue-400" />
+                <CheckCircle className="w-5 h-5 text-primary fill-primary" />
               )}
               {profile.available && (
                 <Badge className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
@@ -277,7 +276,7 @@ export default function ProfilePage() {
               )}
               <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> Joined {formatDate(profile.created_at)}</span>
               {profile.hourly_rate > 0 && (
-                <span className="flex items-center gap-1 text-violet-400 font-semibold">
+                <span className="flex items-center gap-1 text-primary font-semibold">
                   <Clock className="w-3 h-3" /> ${profile.hourly_rate}/hr
                 </span>
               )}
@@ -290,27 +289,27 @@ export default function ProfilePage() {
               <>
                 <Dialog>
                   <DialogTrigger>
-                    <Button className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0 gap-2 shadow-lg shadow-violet-500/20">
+                    <Button className="bg-primary hover:bg-primary/90 text-white font-semibold gap-2 shadow-sm">
                       <Briefcase className="w-4 h-4" /> Hire
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="glass-strong border-white/10">
+                  <DialogContent className="bg-white border-border shadow-lg">
                     <DialogHeader>
-                      <DialogTitle>Send Hire Request to {profile.full_name}</DialogTitle>
+                      <DialogTitle className="text-foreground">Send Hire Request to {profile.full_name}</DialogTitle>
                     </DialogHeader>
                     <Textarea
                       value={hireMessage}
                       onChange={(e) => setHireMessage(e.target.value)}
                       placeholder="Describe your project and what you need..."
-                      className="bg-white/5 border-white/10 min-h-[120px]"
+                      className="bg-white border-border min-h-[120px]"
                     />
-                    <Button onClick={sendHireRequest} disabled={sending || !hireMessage.trim()} className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0">
+                    <Button onClick={sendHireRequest} disabled={sending || !hireMessage.trim()} className="bg-primary hover:bg-primary/90 text-white font-semibold">
                       {sending ? 'Sending...' : 'Send Request'}
                     </Button>
                   </DialogContent>
                 </Dialog>
-                <Button variant="outline" className="border-white/10 gap-2" onClick={toggleSave}>
-                  <Heart className={`w-4 h-4 ${isSaved ? 'fill-red-400 text-red-400' : ''}`} />
+                <Button variant="outline" className="border-border gap-2 bg-white text-foreground hover:bg-muted" onClick={toggleSave}>
+                  <Heart className={`w-4 h-4 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
                   {isSaved ? 'Saved' : 'Save'}
                 </Button>
               </>
@@ -318,14 +317,14 @@ export default function ProfilePage() {
 
             {user && user.id === profile.id && (
               <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-                <DialogTrigger asChild>
+                <DialogTrigger>
                   <Button variant="destructive" className="bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border-0 gap-2 mb-2 w-full sm:w-auto">
                     <Trash2 className="w-4 h-4" /> Delete Account
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="glass-strong border-white/10 max-w-md">
+                <DialogContent className="bg-white border-border shadow-lg max-w-md">
                   <DialogHeader>
-                    <DialogTitle className="text-red-500 flex items-center gap-2">
+                    <DialogTitle className="text-red-600 flex items-center gap-2">
                       <AlertTriangle className="w-5 h-5" /> Danger Zone
                     </DialogTitle>
                   </DialogHeader>
@@ -350,17 +349,17 @@ export default function ProfilePage() {
             {/* Social Links */}
             <div className="flex gap-2">
               {profile.github && (
-                <a href={`https://github.com/${profile.github}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-muted-foreground hover:text-white transition-colors">
+                <a href={`https://github.com/${profile.github}`} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-gray-200 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                   <GithubIcon className="w-4 h-4" />
                 </a>
               )}
               {profile.linkedin && (
-                <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-muted-foreground hover:text-white transition-colors">
+                <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-gray-200 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
               )}
               {profile.website && (
-                <a href={profile.website} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center text-muted-foreground hover:text-white transition-colors">
+                <a href={profile.website} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-lg bg-muted hover:bg-gray-200 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                   <Globe className="w-4 h-4" />
                 </a>
               )}
@@ -381,29 +380,29 @@ export default function ProfilePage() {
         <div className="grid grid-cols-3 gap-4 mb-8">
           {[
             { label: 'Projects', value: portfolio.length },
-            { label: 'Avg Rating', value: avgRating, icon: <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" /> },
+            { label: 'Avg Rating', value: avgRating, icon: <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /> },
             { label: 'Reviews', value: reviews.length },
           ].map((stat) => (
-            <div key={stat.label} className="glass-card rounded-xl p-4 text-center">
+            <div key={stat.label} className="bg-white border border-border shadow-sm rounded-xl p-4 text-center">
               <div className="flex items-center justify-center gap-1.5 mb-1">
                 {stat.icon}
-                <span className="text-xl font-bold">{stat.value}</span>
+                <span className="text-xl font-bold text-foreground">{stat.value}</span>
               </div>
-              <p className="text-xs text-muted-foreground">{stat.label}</p>
+              <p className="text-xs text-muted-foreground font-medium">{stat.label}</p>
             </div>
           ))}
         </div>
 
         {/* Tabs */}
         <Tabs defaultValue="portfolio" className="space-y-6">
-          <TabsList className="bg-white/5 border border-white/10">
+          <TabsList className="bg-muted border border-border">
             <TabsTrigger value="portfolio">Portfolio ({portfolio.length})</TabsTrigger>
             <TabsTrigger value="reviews">Reviews ({reviews.length})</TabsTrigger>
           </TabsList>
 
           <TabsContent value="portfolio">
             {portfolio.length === 0 ? (
-              <div className="text-center py-16 glass-card rounded-xl">
+              <div className="text-center py-16 bg-white border border-border shadow-sm rounded-xl">
                 <Briefcase className="w-10 h-10 text-muted-foreground/30 mx-auto mb-4" />
                 <p className="text-muted-foreground">No portfolio projects yet</p>
               </div>
@@ -422,7 +421,7 @@ export default function ProfilePage() {
 
           <TabsContent value="reviews">
             {reviews.length === 0 ? (
-              <div className="text-center py-16 glass-card rounded-xl">
+              <div className="text-center py-16 bg-white border border-border shadow-sm rounded-xl">
                 <Star className="w-10 h-10 text-muted-foreground/30 mx-auto mb-4" />
                 <p className="text-muted-foreground">No reviews yet</p>
               </div>
@@ -439,14 +438,14 @@ export default function ProfilePage() {
 
       {/* Project Modal */}
       <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="glass-strong border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="bg-white border-border shadow-lg max-w-2xl max-h-[90vh] overflow-y-auto">
           {selectedProject && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-xl">{selectedProject.title}</DialogTitle>
+                <DialogTitle className="text-xl text-foreground">{selectedProject.title}</DialogTitle>
               </DialogHeader>
               {selectedProject.images?.[0] && (
-                <div className="rounded-xl overflow-hidden aspect-video bg-black/20">
+                <div className="rounded-xl overflow-hidden aspect-video bg-muted">
                   <img src={selectedProject.images[0]} alt={selectedProject.title} className="w-full h-full object-contain" />
                 </div>
               )}
@@ -457,7 +456,7 @@ export default function ProfilePage() {
                 ))}
               </div>
               {selectedProject.project_link && (
-                <a href={selectedProject.project_link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-violet-400 hover:text-violet-300">
+                <a href={selectedProject.project_link} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-primary hover:underline">
                   <ExternalLink className="w-4 h-4" /> View Project
                 </a>
               )}

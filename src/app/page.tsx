@@ -28,17 +28,6 @@ function Counter({ value, suffix = '' }: { value: number; suffix?: string }) {
   );
 }
 
-/* ─── Floating Orb ─── */
-function FloatingOrb({ className }: { className?: string }) {
-  return (
-    <motion.div
-      animate={{ y: [0, -30, 0], x: [0, 15, 0] }}
-      transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      className={`absolute rounded-full blur-3xl opacity-20 pointer-events-none ${className}`}
-    />
-  );
-}
-
 /* ─── Hero Section ─── */
 function HeroSection() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,14 +41,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background Effects */}
-      <FloatingOrb className="w-96 h-96 bg-violet-600 -top-20 -left-20" />
-      <FloatingOrb className="w-80 h-80 bg-cyan-600 top-40 -right-20" />
-      <FloatingOrb className="w-64 h-64 bg-pink-600 bottom-20 left-1/3" />
-
-      {/* Grid lines */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(139,92,246,0.1)_0%,_transparent_70%)]" />
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-muted/10">
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -74,18 +56,18 @@ function HeroSection() {
             transition={{ delay: 0.2 }}
             className="mb-8 inline-flex"
           >
-            <Badge className="px-4 py-2 text-sm bg-violet-500/10 text-violet-300 border-violet-500/20 hover:bg-violet-500/20 gap-2">
+            <Badge className="px-4 py-2 text-sm bg-primary/10 text-primary border-primary/20 gap-2">
               <Sparkles className="w-3.5 h-3.5" />
               The future of student freelancing is here
             </Badge>
           </motion.div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight mb-6 text-foreground">
             Where Student Talent{' '}
             <br className="hidden sm:block" />
             Meets{' '}
-            <span className="gradient-text">Opportunity</span>
+            <span className="text-primary">Opportunity</span>
           </h1>
 
           {/* Subheading */}
@@ -97,19 +79,18 @@ function HeroSection() {
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-10">
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-violet-600 to-cyan-600 rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur" />
-              <div className="relative flex items-center glass-strong rounded-xl p-1.5">
+              <div className="relative flex items-center bg-white border border-border shadow-md rounded-xl p-1.5">
                 <Search className="w-5 h-5 text-muted-foreground ml-4 shrink-0" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder='Try "React developer", "UI designer", "video editor"...'
-                  className="flex-1 bg-transparent px-4 py-3 text-sm outline-none placeholder:text-muted-foreground/60"
+                  className="flex-1 bg-transparent px-4 py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
                 />
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-6 rounded-lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-semibold border-0 px-6 rounded-lg"
                 >
                   Search
                 </Button>
@@ -124,7 +105,7 @@ function HeroSection() {
               <Link key={tag} href={`/explore?q=${tag}`}>
                 <Badge
                   variant="secondary"
-                  className="cursor-pointer hover:bg-white/10 transition-colors text-xs"
+                  className="cursor-pointer bg-muted text-foreground hover:bg-gray-200 transition-colors text-xs"
                 >
                   {tag}
                 </Badge>
@@ -145,10 +126,10 @@ function HeroSection() {
               { value: 98, suffix: '%', label: 'Satisfaction' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold gradient-text">
+                <div className="text-2xl sm:text-3xl font-bold text-primary">
                   <Counter value={stat.value} suffix={stat.suffix} />
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">{stat.label}</p>
+                <p className="text-xs text-muted-foreground mt-1 font-medium">{stat.label}</p>
               </div>
             ))}
           </motion.div>
@@ -178,11 +159,11 @@ function CategoriesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge className="mb-4 bg-violet-500/10 text-violet-300 border-violet-500/20">
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
             Categories
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Explore by <span className="gradient-text">Category</span>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
+            Explore by <span className="text-primary">Category</span>
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto">
             Find the perfect student freelancer across dozens of creative and technical categories.
@@ -199,12 +180,12 @@ function CategoriesSection() {
               transition={{ delay: i * 0.08 }}
             >
               <Link href={`/explore?category=${encodeURIComponent(cat.label)}`}>
-                <div className="group glass-card rounded-xl p-6 hover:bg-white/[0.06] transition-all duration-300 cursor-pointer">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <cat.icon className="w-6 h-6 text-white" />
+                <div className="group bg-white border border-border rounded-xl p-6 hover:shadow-md transition-all duration-300 cursor-pointer text-left">
+                  <div className={`w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <cat.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold mb-1">{cat.label}</h3>
-                  <p className="text-sm text-muted-foreground">{cat.count.toLocaleString()} students</p>
+                  <h3 className="font-semibold mb-1 text-foreground">{cat.label}</h3>
+                  <p className="text-sm text-muted-foreground font-medium">{cat.count.toLocaleString()} students</p>
                 </div>
               </Link>
             </motion.div>
@@ -241,8 +222,7 @@ const featuredStudents = [
 
 function FeaturedSection() {
   return (
-    <section className="py-24 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(139,92,246,0.06)_0%,_transparent_50%)]" />
+    <section className="py-24 relative bg-muted/20">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -251,11 +231,11 @@ function FeaturedSection() {
           className="flex items-center justify-between mb-12"
         >
           <div>
-            <Badge className="mb-4 bg-cyan-500/10 text-cyan-300 border-cyan-500/20">
+            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
               Featured
             </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold">
-              Top <span className="gradient-text">Student Talent</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground">
+              Top <span className="text-primary">Student Talent</span>
             </h2>
           </div>
           <Link href="/explore">
@@ -275,14 +255,14 @@ function FeaturedSection() {
               transition={{ delay: i * 0.1 }}
             >
               <Link href={`/profile/${student.username}`}>
-                <div className="group glass-card rounded-xl p-5 hover:bg-white/[0.06] transition-all duration-300 hover:glow-violet cursor-pointer">
+                <div className="group bg-white border border-border rounded-xl p-5 hover:shadow-md transition-all duration-300 cursor-pointer">
                   {/* Avatar */}
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0">
                       {student.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="font-semibold text-sm truncate group-hover:text-violet-300 transition-colors">
+                      <h3 className="font-semibold text-sm truncate group-hover:text-primary text-foreground transition-colors">
                         {student.name}
                       </h3>
                       <p className="text-xs text-muted-foreground truncate">{student.role}</p>
@@ -302,13 +282,13 @@ function FeaturedSection() {
                   </div>
 
                   {/* Stats Row */}
-                  <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                  <div className="flex items-center justify-between pt-3 border-t border-border mt-4">
                     <div className="flex items-center gap-1 text-xs">
-                      <span className="text-yellow-400">★</span>
-                      <span>{student.rating}</span>
+                      <span className="text-yellow-500">★</span>
+                      <span className="font-medium text-foreground">{student.rating}</span>
                       <span className="text-muted-foreground">({student.projects})</span>
                     </div>
-                    <span className="text-sm font-semibold text-violet-400">
+                    <span className="text-sm font-semibold text-primary">
                       ${student.rate}/hr
                     </span>
                   </div>
@@ -354,9 +334,9 @@ function HowItWorksSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <Badge className="mb-4 bg-pink-500/10 text-pink-300 border-pink-500/20">How It Works</Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Three Steps to <span className="gradient-text-pink">Success</span>
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">How It Works</Badge>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-foreground">
+            Three Steps to <span className="text-primary">Success</span>
           </h2>
         </motion.div>
 
@@ -368,14 +348,14 @@ function HowItWorksSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
-              className="glass-card rounded-xl p-8 text-center relative overflow-hidden group"
+              className="bg-white border border-border shadow-sm rounded-xl p-8 text-center relative overflow-hidden group"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r opacity-50 group-hover:opacity-100 transition-opacity" style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }} />
-              <div className={`inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br ${step.gradient} items-center justify-center text-white font-bold text-lg mb-6`}>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className={`inline-flex w-14 h-14 rounded-2xl bg-primary/10 items-center justify-center text-primary font-bold text-lg mb-6`}>
                 {step.step}
               </div>
-              <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">{step.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed font-medium">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -389,17 +369,16 @@ function CTASection() {
   const { user } = useAuthStore();
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(139,92,246,0.15)_0%,_transparent_60%)]" />
+    <section className="py-24 relative overflow-hidden bg-primary/5">
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card rounded-2xl p-12 md:p-16"
+          className="bg-white border border-border shadow-sm rounded-2xl p-12 md:p-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Ready to Get <span className="gradient-text">Started?</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Ready to Get <span className="text-primary">Started?</span>
           </h2>
           <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
             Join thousands of students and clients already building amazing things together.
@@ -407,19 +386,19 @@ function CTASection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {user ? (
               <Link href="/dashboard">
-                <Button size="lg" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-8 shadow-lg shadow-violet-500/20 w-full sm:w-auto">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold border-0 px-8 w-full sm:w-auto">
                   Go to Dashboard <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
             ) : (
               <>
                 <Link href="/signup?role=student">
-                  <Button size="lg" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 px-8 shadow-lg shadow-violet-500/20 w-full sm:w-auto">
+                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold border-0 px-8 w-full sm:w-auto">
                     Join as Student
                   </Button>
                 </Link>
                 <Link href="/signup?role=client">
-                  <Button size="lg" variant="outline" className="border-white/10 hover:bg-white/5 px-8 w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="border-border hover:bg-muted font-semibold text-foreground px-8 w-full sm:w-auto">
                     Hire a Student
                   </Button>
                 </Link>

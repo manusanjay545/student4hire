@@ -19,10 +19,10 @@ import type { HireRequest, Profile, ClientProject } from '@/types/database';
 import Link from 'next/link';
 
 const statusStyles: Record<string, string> = {
-  pending: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-  accepted: 'bg-green-500/10 text-green-400 border-green-500/20',
-  rejected: 'bg-red-500/10 text-red-400 border-red-500/20',
-  completed: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
+  pending: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
+  accepted: 'bg-green-500/10 text-green-600 border-green-500/20',
+  rejected: 'bg-red-500/10 text-red-600 border-red-500/20',
+  completed: 'bg-primary/10 text-primary border-primary/20',
 };
 
 const statusIcons: Record<string, typeof Clock> = {
@@ -115,7 +115,7 @@ export default function HireRequestsPage() {
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
-          <h1 className="text-3xl font-bold">Hire Requests</h1>
+          <h1 className="text-3xl font-bold text-foreground">Hire Requests</h1>
           <p className="text-muted-foreground mt-1">
             {profile?.role === 'student'
               ? 'Manage incoming hire requests from clients.'
@@ -123,7 +123,7 @@ export default function HireRequestsPage() {
           </p>
         </div>
         {pendingCount > 0 && (
-          <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20">
+          <Badge className="bg-amber-500/10 text-amber-600 border-amber-500/20">
             {pendingCount} Pending
           </Badge>
         )}
@@ -137,8 +137,8 @@ export default function HireRequestsPage() {
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
               filter === f
-                ? 'bg-violet-500/10 text-violet-300 border border-violet-500/20'
-                : 'text-muted-foreground hover:text-white hover:bg-white/5 border border-transparent'
+                ? 'bg-primary/10 text-primary border border-primary/20'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted border border-transparent'
             }`}
           >
             {f === 'all' ? `All (${requests.length})` : `${f.charAt(0).toUpperCase() + f.slice(1)} (${requests.filter(r => r.status === f).length})`}
@@ -148,9 +148,9 @@ export default function HireRequestsPage() {
 
       {/* Requests List */}
       {filtered.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center border-dashed border-2 border-white/10">
+        <div className="bg-white border border-border shadow-sm rounded-2xl p-12 text-center border-dashed border-2">
           <Briefcase className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
-          <h3 className="text-lg font-semibold mb-2">No hire requests</h3>
+          <h3 className="text-lg font-semibold mb-2 text-foreground">No hire requests</h3>
           <p className="text-muted-foreground mb-6">
             {filter === 'all'
               ? (profile?.role === 'student' ? 'You haven\'t received any hire requests yet.' : 'You haven\'t sent any hire requests yet.')
@@ -158,7 +158,7 @@ export default function HireRequestsPage() {
           </p>
           {profile?.role === 'client' && (
             <Link href="/explore">
-              <Button className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0">
+              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold border-0">
                 Browse Students
               </Button>
             </Link>
@@ -178,14 +178,14 @@ export default function HireRequestsPage() {
                 transition={{ delay: i * 0.05 }}
               >
                 <div
-                  className="glass-card rounded-xl p-5 hover:bg-white/[0.03] transition-all cursor-pointer group"
+                  className="bg-white border border-border shadow-sm rounded-xl p-5 hover:shadow-md transition-all cursor-pointer group"
                   onClick={() => setSelectedRequest(req)}
                 >
                   <div className="flex items-start gap-4">
                     {/* Avatar */}
                     <Avatar className="w-11 h-11 shrink-0">
                       <AvatarImage src={otherPerson?.avatar_url || ''} />
-                      <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+                      <AvatarFallback className="bg-primary text-xs text-white">
                         {getInitials(otherPerson?.full_name || 'U')}
                       </AvatarFallback>
                     </Avatar>
@@ -193,7 +193,7 @@ export default function HireRequestsPage() {
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <h3 className="font-semibold text-sm">{otherPerson?.full_name}</h3>
+                        <h3 className="font-semibold text-sm text-foreground">{otherPerson?.full_name}</h3>
                         <Badge className={`${statusStyles[req.status]} text-[10px]`}>
                           <StatusIcon className="w-3 h-3 mr-1" />
                           {req.status}
@@ -201,7 +201,7 @@ export default function HireRequestsPage() {
                       </div>
 
                       {req.project && (
-                        <p className="text-xs text-violet-400 mb-1 flex items-center gap-1">
+                        <p className="text-xs text-primary font-semibold mb-1 flex items-center gap-1">
                           <Briefcase className="w-3 h-3" /> {req.project.title}
                         </p>
                       )}
@@ -211,7 +211,7 @@ export default function HireRequestsPage() {
                       <div className="flex items-center gap-4 text-[10px] text-muted-foreground">
                         <span>{formatRelativeTime(req.created_at)}</span>
                         {req.budget > 0 && (
-                          <span className="flex items-center gap-0.5 text-green-400">
+                          <span className="flex items-center gap-0.5 text-green-600 font-semibold">
                             <DollarSign className="w-3 h-3" />${req.budget}
                           </span>
                         )}
@@ -230,7 +230,7 @@ export default function HireRequestsPage() {
 
       {/* Detail Dialog */}
       <Dialog open={!!selectedRequest} onOpenChange={() => setSelectedRequest(null)}>
-        <DialogContent className="glass-strong border-white/10 sm:max-w-[500px]">
+        <DialogContent className="bg-white border-border shadow-lg sm:max-w-[500px]">
           {selectedRequest && (() => {
             const otherPerson = profile?.role === 'student' ? selectedRequest.client : selectedRequest.student;
             const StatusIcon = statusIcons[selectedRequest.status] || Clock;
@@ -238,7 +238,7 @@ export default function HireRequestsPage() {
             return (
               <>
                 <DialogHeader>
-                  <DialogTitle className="text-lg">Hire Request Details</DialogTitle>
+                  <DialogTitle className="text-lg text-foreground">Hire Request Details</DialogTitle>
                 </DialogHeader>
 
                 <div className="space-y-5 mt-2">
@@ -246,12 +246,12 @@ export default function HireRequestsPage() {
                   <div className="flex items-center gap-3">
                     <Avatar className="w-12 h-12">
                       <AvatarImage src={otherPerson?.avatar_url || ''} />
-                      <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-sm text-white">
+                      <AvatarFallback className="bg-primary text-sm text-white">
                         {getInitials(otherPerson?.full_name || 'U')}
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-semibold">{otherPerson?.full_name}</p>
+                      <p className="font-semibold text-foreground">{otherPerson?.full_name}</p>
                       <p className="text-xs text-muted-foreground">@{otherPerson?.username} • {profile?.role === 'student' ? 'Client' : 'Student'}</p>
                     </div>
                     <Badge className={`${statusStyles[selectedRequest.status]} ml-auto`}>
@@ -262,11 +262,11 @@ export default function HireRequestsPage() {
 
                   {/* Project */}
                   {selectedRequest.project && (
-                    <div className="glass-card rounded-lg p-3">
+                    <div className="bg-muted border border-border rounded-lg p-3">
                       <p className="text-xs text-muted-foreground mb-1">Related Project</p>
-                      <p className="text-sm font-medium">{selectedRequest.project.title}</p>
+                      <p className="text-sm font-medium text-foreground">{selectedRequest.project.title}</p>
                       {selectedRequest.project.budget > 0 && (
-                        <p className="text-xs text-violet-400 mt-1">${selectedRequest.project.budget} budget</p>
+                        <p className="text-xs text-primary font-semibold mt-1">${selectedRequest.project.budget} budget</p>
                       )}
                     </div>
                   )}
@@ -274,7 +274,7 @@ export default function HireRequestsPage() {
                   {/* Message */}
                   <div>
                     <p className="text-xs text-muted-foreground mb-1.5">Message</p>
-                    <div className="glass-card rounded-lg p-4 text-sm">
+                    <div className="bg-muted border border-border rounded-lg p-4 text-sm text-foreground">
                       {selectedRequest.message}
                     </div>
                   </div>
@@ -283,18 +283,18 @@ export default function HireRequestsPage() {
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span>Sent {formatDate(selectedRequest.created_at)}</span>
                     {selectedRequest.budget > 0 && (
-                      <span className="text-green-400 font-medium">${selectedRequest.budget} offered</span>
+                      <span className="text-green-600 font-semibold">${selectedRequest.budget} offered</span>
                     )}
                   </div>
 
                   {/* Actions */}
-                  <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                  <div className="flex flex-wrap gap-2 pt-2 border-t border-border">
                     {selectedRequest.status === 'pending' && profile?.role === 'student' && (
                       <>
                         <Button
                           onClick={() => updateStatus(selectedRequest.id, 'accepted')}
                           disabled={responding}
-                          className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 text-white border-0 gap-2"
+                          className="flex-1 bg-primary hover:bg-primary/90 text-white font-semibold gap-2"
                         >
                           <CheckCircle className="w-4 h-4" /> Accept
                         </Button>
@@ -315,7 +315,7 @@ export default function HireRequestsPage() {
                           onClick={() => startConversation(
                             profile?.role === 'student' ? selectedRequest.client_id : selectedRequest.student_id
                           )}
-                          className="flex-1 bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0 gap-2"
+                          className="flex-1 bg-primary hover:bg-primary/90 text-white font-semibold gap-2"
                         >
                           <MessageSquare className="w-4 h-4" /> Message
                         </Button>
@@ -323,7 +323,7 @@ export default function HireRequestsPage() {
                           onClick={() => updateStatus(selectedRequest.id, 'completed')}
                           disabled={responding}
                           variant="outline"
-                          className="flex-1 border-white/10 gap-2"
+                          className="flex-1 border-border bg-white text-foreground hover:bg-muted gap-2"
                         >
                           <CheckCircle className="w-4 h-4" /> Mark Complete
                         </Button>

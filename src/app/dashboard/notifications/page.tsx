@@ -73,13 +73,13 @@ export default function NotificationsPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Notifications</h1>
+          <h1 className="text-3xl font-bold text-foreground">Notifications</h1>
           {unreadCount > 0 && (
             <p className="text-sm text-muted-foreground mt-1">{unreadCount} unread notification{unreadCount !== 1 ? 's' : ''}</p>
           )}
         </div>
         {unreadCount > 0 && (
-          <Button variant="outline" size="sm" className="border-white/10 gap-2" onClick={markAllRead}>
+          <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-muted gap-2" onClick={markAllRead}>
             <CheckCheck className="w-4 h-4" /> Mark all read
           </Button>
         )}
@@ -87,13 +87,13 @@ export default function NotificationsPage() {
 
       {loading ? (
         <div className="space-y-3">{Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="glass-card rounded-xl h-20 animate-pulse" />
+          <div key={i} className="bg-white border border-border shadow-sm rounded-xl h-20 animate-pulse" />
         ))}</div>
       ) : notifications.length === 0 ? (
-        <div className="glass-card rounded-xl p-12 text-center">
+        <div className="bg-white border border-border shadow-sm rounded-xl p-12 text-center">
           <Bell className="w-12 h-12 text-muted-foreground/20 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold mb-1">All caught up!</h3>
-          <p className="text-sm text-muted-foreground">No notifications to show.</p>
+          <h3 className="text-lg font-semibold mb-1 text-foreground">All caught up!</h3>
+          <p className="text-sm text-muted-foreground font-medium">No notifications to show.</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -101,17 +101,17 @@ export default function NotificationsPage() {
             const Icon = typeIcons[n.type] || Bell;
             return (
               <div key={n.id} onClick={() => markRead(n.id)}
-                className={`glass-card rounded-xl p-4 flex items-start gap-4 cursor-pointer transition-all hover:bg-white/[0.04] ${!n.read ? 'border-l-2 border-l-violet-500' : 'opacity-70'}`}
+                className={`bg-white border border-border shadow-sm rounded-xl p-4 flex items-start gap-4 cursor-pointer transition-all hover:shadow-md ${!n.read ? 'border-l-4 border-l-primary' : 'opacity-70'}`}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${!n.read ? 'bg-violet-500/20 text-violet-400' : 'bg-white/5 text-muted-foreground'}`}>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${!n.read ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'}`}>
                   <Icon className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium">{n.title}</p>
-                  <p className="text-xs text-muted-foreground mt-0.5">{n.content}</p>
+                  <p className="text-sm font-semibold text-foreground">{n.title}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 font-medium">{n.content}</p>
                   <p className="text-[10px] text-muted-foreground mt-2">{formatRelativeTime(n.created_at)}</p>
                 </div>
-                {!n.read && <div className="w-2 h-2 rounded-full bg-violet-500 shrink-0 mt-2" />}
+                {!n.read && <div className="w-2 h-2 rounded-full bg-primary shrink-0 mt-2" />}
               </div>
             );
           })}

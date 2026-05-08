@@ -102,19 +102,19 @@ export default function SettingsPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Settings</h1>
+        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
         <p className="text-muted-foreground mt-1">Manage your profile and preferences.</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         {/* Avatar */}
-        <div className="glass-card rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">Profile Photo</h2>
+        <div className="bg-white border border-border shadow-sm rounded-xl p-6">
+          <h2 className="text-lg font-semibold mb-4 text-foreground">Profile Photo</h2>
           <div className="flex items-center gap-6">
             <div className="relative group">
-              <Avatar className="w-20 h-20">
+              <Avatar className="w-20 h-20 shadow-sm">
                 <AvatarImage src={avatarPreview || profile?.avatar_url || ''} />
-                <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xl text-white">
+                <AvatarFallback className="bg-primary text-xl text-white font-bold">
                   {getInitials(profile?.full_name || 'U')}
                 </AvatarFallback>
               </Avatar>
@@ -131,51 +131,51 @@ export default function SettingsPage() {
         </div>
 
         {/* Basic Info */}
-        <div className="glass-card rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold mb-2">Basic Information</h2>
+        <div className="bg-white border border-border shadow-sm rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold mb-2 text-foreground">Basic Information</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Full Name</label>
-              <Input {...register('full_name')} className="bg-white/5 border-white/10" />
+              <label className="text-sm font-medium mb-1.5 block text-foreground">Full Name</label>
+              <Input {...register('full_name')} className="bg-white border-border" />
               {errors.full_name && <p className="text-xs text-red-400 mt-1">{errors.full_name.message}</p>}
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Username</label>
-              <Input {...register('username')} className="bg-white/5 border-white/10" />
-              {errors.username && <p className="text-xs text-red-400 mt-1">{errors.username.message}</p>}
+              <label className="text-sm font-medium mb-1.5 block text-foreground">Username</label>
+              <Input {...register('username')} className="bg-white border-border" />
+              {errors.username && <p className="text-xs text-red-500 mt-1">{errors.username.message}</p>}
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Bio</label>
-            <Textarea {...register('bio')} className="bg-white/5 border-white/10 min-h-[100px]" placeholder="Tell us about yourself..." />
+            <label className="text-sm font-medium mb-1.5 block text-foreground">Bio</label>
+            <Textarea {...register('bio')} className="bg-white border-border min-h-[100px]" placeholder="Tell us about yourself..." />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium mb-1.5 block">College</label>
-              <Input {...register('college_name')} className="bg-white/5 border-white/10" />
+              <label className="text-sm font-medium mb-1.5 block text-foreground">College</label>
+              <Input {...register('college_name')} className="bg-white border-border" />
             </div>
             <div>
-              <label className="text-sm font-medium mb-1.5 block">Location</label>
-              <Input {...register('location')} className="bg-white/5 border-white/10" />
+              <label className="text-sm font-medium mb-1.5 block text-foreground">Location</label>
+              <Input {...register('location')} className="bg-white border-border" />
             </div>
           </div>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Hourly Rate (USD)</label>
-            <Input {...register('hourly_rate')} type="number" className="bg-white/5 border-white/10 w-40" />
+            <label className="text-sm font-medium mb-1.5 block text-foreground">Hourly Rate (USD)</label>
+            <Input {...register('hourly_rate')} type="number" className="bg-white border-border w-40" />
           </div>
         </div>
 
         {/* Skills */}
-        <div className="glass-card rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-2">Skills</h2>
+        <div className="bg-white border border-border shadow-sm rounded-xl p-6">
+          <h2 className="text-lg font-semibold mb-2 text-foreground">Skills</h2>
           <p className="text-sm text-muted-foreground mb-4">Select skills that match your expertise.</p>
           <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto scrollbar-thin">
             {SKILLS.map(skill => (
               <button key={skill} type="button" onClick={() => toggleSkill(skill)}
-                className={`px-3 py-1.5 rounded-lg text-xs transition-all ${
+                className={`px-3 py-1.5 rounded-lg text-xs transition-all font-medium ${
                   selectedSkills.includes(skill)
-                    ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-                    : 'bg-white/5 text-muted-foreground border border-white/10 hover:border-white/20'
+                    ? 'bg-primary/10 text-primary border border-primary/20'
+                    : 'bg-muted text-muted-foreground border border-border hover:bg-gray-200'
                 }`}
               >{skill}</button>
             ))}
@@ -183,25 +183,25 @@ export default function SettingsPage() {
         </div>
 
         {/* Social Links */}
-        <div className="glass-card rounded-xl p-6 space-y-4">
-          <h2 className="text-lg font-semibold mb-2">Social Links</h2>
+        <div className="bg-white border border-border shadow-sm rounded-xl p-6 space-y-4">
+          <h2 className="text-lg font-semibold mb-2 text-foreground">Social Links</h2>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Website</label>
-            <Input {...register('website')} className="bg-white/5 border-white/10" placeholder="https://yoursite.com" />
+            <label className="text-sm font-medium mb-1.5 block text-foreground">Website</label>
+            <Input {...register('website')} className="bg-white border-border" placeholder="https://yoursite.com" />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">GitHub</label>
-            <Input {...register('github')} className="bg-white/5 border-white/10" placeholder=" username" />
+            <label className="text-sm font-medium mb-1.5 block text-foreground">GitHub</label>
+            <Input {...register('github')} className="bg-white border-border" placeholder=" username" />
           </div>
           <div>
-            <label className="text-sm font-medium mb-1.5 block">LinkedIn</label>
-            <Input {...register('linkedin')} className="bg-white/5 border-white/10" placeholder="https://linkedin.com/in/..." />
+            <label className="text-sm font-medium mb-1.5 block text-foreground">LinkedIn</label>
+            <Input {...register('linkedin')} className="bg-white border-border" placeholder="https://linkedin.com/in/..." />
           </div>
         </div>
 
         {/* Save Button */}
         <div className="flex justify-end">
-          <Button type="submit" disabled={saving} className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0 gap-2 px-8">
+          <Button type="submit" disabled={saving} className="bg-primary hover:bg-primary/90 text-white font-semibold border-0 gap-2 px-8">
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : saved ? <><Check className="w-4 h-4" /> Saved!</> : 'Save Changes'}
           </Button>
         </div>

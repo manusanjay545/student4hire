@@ -45,21 +45,19 @@ export function Navbar() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'glass-strong shadow-lg shadow-black/10'
-            : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-200 ${
+          scrolled ? 'shadow-sm' : ''
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-18">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-bold tracking-tight">
-                Student<span className="gradient-text">lance</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">
+                Student<span className="text-primary">lance</span>
               </span>
             </Link>
 
@@ -69,10 +67,10 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
                     pathname === link.href
-                      ? 'text-white bg-white/10'
-                      : 'text-muted-foreground hover:text-white hover:bg-white/5'
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
                   }`}
                 >
                   {link.label}
@@ -84,7 +82,7 @@ export function Navbar() {
             <div className="flex items-center gap-3">
               {/* Search Button */}
               <Link href="/explore">
-                <Button variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-white">
+                <Button variant="ghost" size="icon" className="hidden sm:flex text-muted-foreground hover:text-foreground">
                   <Search className="w-4 h-4" />
                 </Button>
               </Link>
@@ -93,36 +91,36 @@ export function Navbar() {
                 <>
                   {/* Notifications */}
                   <Link href="/dashboard/notifications">
-                    <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-white">
+                    <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-foreground">
                       <Bell className="w-4 h-4" />
-                      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-violet-500 rounded-full" />
+                      <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-primary rounded-full" />
                     </Button>
                   </Link>
 
                   {/* Messages */}
                   <Link href="/dashboard/messages">
-                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-white">
+                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
                       <MessageSquare className="w-4 h-4" />
                     </Button>
                   </Link>
 
                   {/* User Menu */}
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-2 rounded-full p-0.5 hover:bg-white/5 transition-colors cursor-pointer">
-                      <Avatar className="w-8 h-8 border border-white/10">
+                    <DropdownMenuTrigger className="flex items-center gap-2 rounded-full p-0.5 hover:bg-muted transition-colors cursor-pointer">
+                      <Avatar className="w-8 h-8 border border-border">
                         <AvatarImage src={profile?.avatar_url || ''} />
-                        <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+                        <AvatarFallback className="bg-primary text-xs text-white">
                           {getInitials(profile?.full_name || 'U')}
                         </AvatarFallback>
                       </Avatar>
                       <ChevronDown className="w-3 h-3 text-muted-foreground hidden sm:block" />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56 glass-strong border-white/10">
+                    <DropdownMenuContent align="end" className="w-56 bg-white border-border shadow-md">
                       <div className="px-3 py-2">
-                        <p className="text-sm font-medium">{profile?.full_name}</p>
+                        <p className="text-sm font-medium text-foreground">{profile?.full_name}</p>
                         <p className="text-xs text-muted-foreground">@{profile?.username}</p>
                       </div>
-                      <DropdownMenuSeparator className="bg-white/10" />
+                      <DropdownMenuSeparator className="bg-border" />
                       <DropdownMenuItem render={<Link href="/dashboard" />} className="flex items-center gap-2">
                         <LayoutDashboard className="w-4 h-4" /> Dashboard
                       </DropdownMenuItem>
@@ -137,8 +135,8 @@ export function Navbar() {
                           <Heart className="w-4 h-4" /> Saved
                         </DropdownMenuItem>
                       )}
-                      <DropdownMenuSeparator className="bg-white/10" />
-                      <DropdownMenuItem onClick={() => signOut()} className="text-red-400 focus:text-red-400">
+                      <DropdownMenuSeparator className="bg-border" />
+                      <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive cursor-pointer">
                         <LogOut className="w-4 h-4 mr-2" /> Sign out
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -147,13 +145,13 @@ export function Navbar() {
               ) : (
                 <div className="flex items-center gap-2">
                   <Link href="/login">
-                    <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-white">
-                      Log in
+                    <Button variant="ghost" size="sm" className="text-foreground hover:text-primary font-semibold">
+                      Sign in
                     </Button>
                   </Link>
                   <Link href="/signup">
-                    <Button size="sm" className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0 shadow-lg shadow-violet-500/20">
-                      Sign up
+                    <Button size="sm" className="bg-primary hover:bg-primary/90 text-white font-semibold">
+                      Join
                     </Button>
                   </Link>
                 </div>
@@ -180,7 +178,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="fixed inset-x-0 top-16 z-40 glass-strong border-b border-white/10 md:hidden"
+            className="fixed inset-x-0 top-16 z-40 bg-white border-b border-border shadow-md md:hidden"
           >
             <nav className="flex flex-col p-4 gap-1">
               {navLinks.map((link) => (
@@ -188,10 +186,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-4 py-3 text-sm font-medium transition-colors ${
                     pathname === link.href
-                      ? 'text-white bg-white/10'
-                      : 'text-muted-foreground hover:text-white hover:bg-white/5'
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary hover:bg-muted rounded-md'
                   }`}
                 >
                   {link.label}

@@ -31,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} dark`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen flex flex-col gradient-bg grid-pattern scrollbar-thin antialiased">
+      <body className="min-h-screen flex flex-col scrollbar-thin antialiased">
         <Providers>
           <Navbar />
           <main className="flex-1">{children}</main>

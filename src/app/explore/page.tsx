@@ -22,11 +22,11 @@ function StudentCard({ student }: { student: Profile }) {
     <Link href={`/profile/${student.username}`}>
       <motion.div
         whileHover={{ y: -4 }}
-        className="glass-card rounded-xl p-5 hover:bg-white/[0.06] transition-all duration-300 hover:glow-violet cursor-pointer h-full flex flex-col"
+        className="bg-white border border-border shadow-sm rounded-xl p-5 hover:shadow-md transition-all duration-300 cursor-pointer h-full flex flex-col"
       >
         {/* Header */}
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shrink-0 relative">
+          <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0 relative">
             {student.avatar_url ? (
               <img src={student.avatar_url} alt={student.full_name} className="w-full h-full rounded-full object-cover" />
             ) : (
@@ -38,8 +38,8 @@ function StudentCard({ student }: { student: Profile }) {
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
-              <h3 className="font-semibold text-sm truncate">{student.full_name}</h3>
-              {student.verified && <span className="text-blue-400 text-xs">✓</span>}
+              <h3 className="font-semibold text-sm truncate text-foreground">{student.full_name}</h3>
+              {student.verified && <span className="text-primary text-xs">✓</span>}
             </div>
             <p className="text-xs text-muted-foreground truncate">@{student.username}</p>
           </div>
@@ -72,7 +72,7 @@ function StudentCard({ student }: { student: Profile }) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-3 border-t border-white/5">
+        <div className="flex items-center justify-between pt-3 border-t border-border">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             {student.location && (
               <span className="flex items-center gap-1">
@@ -81,7 +81,7 @@ function StudentCard({ student }: { student: Profile }) {
             )}
           </div>
           {student.hourly_rate > 0 && (
-            <span className="text-sm font-semibold text-violet-400">
+            <span className="text-sm font-semibold text-primary">
               ${student.hourly_rate}/hr
             </span>
           )}
@@ -106,12 +106,12 @@ function FilterPanel({
   return (
     <div className="space-y-6">
       <div>
-        <label className="text-sm font-medium mb-2 block">Category</label>
+        <label className="text-sm font-medium mb-2 block text-foreground">Category</label>
         <Select value={category} onValueChange={(v) => setCategory(v ?? '')}>
-          <SelectTrigger className="bg-white/5 border-white/10">
+          <SelectTrigger className="bg-white border-border text-foreground">
             <SelectValue placeholder="All categories" />
           </SelectTrigger>
-          <SelectContent className="glass-strong border-white/10">
+          <SelectContent className="bg-white border-border shadow-md">
             <SelectItem value="all">All categories</SelectItem>
             {CATEGORIES.map((cat) => (
               <SelectItem key={cat} value={cat}>{cat}</SelectItem>
@@ -121,12 +121,12 @@ function FilterPanel({
       </div>
 
       <div>
-        <label className="text-sm font-medium mb-2 block">Sort by</label>
+        <label className="text-sm font-medium mb-2 block text-foreground">Sort by</label>
         <Select value={sortBy} onValueChange={(v) => setSortBy(v ?? '')}>
-          <SelectTrigger className="bg-white/5 border-white/10">
+          <SelectTrigger className="bg-white border-border text-foreground">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="glass-strong border-white/10">
+          <SelectContent className="bg-white border-border shadow-md">
             <SelectItem value="newest">Newest</SelectItem>
             <SelectItem value="rate_low">Price: Low to High</SelectItem>
             <SelectItem value="rate_high">Price: High to Low</SelectItem>
@@ -135,20 +135,20 @@ function FilterPanel({
       </div>
 
       <div>
-        <label className="text-sm font-medium mb-2 block">Hourly Rate</label>
+        <label className="text-sm font-medium mb-2 block text-foreground">Hourly Rate</label>
         <div className="grid grid-cols-2 gap-2">
           <Input
             placeholder="Min $"
             value={minRate}
             onChange={(e) => setMinRate(e.target.value)}
-            className="bg-white/5 border-white/10"
+            className="bg-white border-border"
             type="number"
           />
           <Input
             placeholder="Max $"
             value={maxRate}
             onChange={(e) => setMaxRate(e.target.value)}
-            className="bg-white/5 border-white/10"
+            className="bg-white border-border"
             type="number"
           />
         </div>
@@ -156,7 +156,7 @@ function FilterPanel({
 
       <Button
         variant="outline"
-        className="w-full border-white/10"
+        className="w-full border-border hover:bg-muted text-foreground"
         onClick={() => { setCategory('all'); setMinRate(''); setMaxRate(''); }}
       >
         Clear Filters
@@ -230,8 +230,8 @@ function ExploreContent() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl sm:text-4xl font-bold mb-2">
-            Explore <span className="gradient-text">Student Talent</span>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-foreground">
+            Explore <span className="text-primary">Student Talent</span>
           </h1>
           <p className="text-muted-foreground">
             Discover {students.length} talented students ready to bring your project to life.
@@ -246,12 +246,12 @@ function ExploreContent() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search students, skills, colleges..."
-              className="pl-10 bg-white/5 border-white/10 h-11"
+              className="pl-10 bg-white border-border h-11"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -261,10 +261,10 @@ function ExploreContent() {
           {/* Desktop filter */}
           <div className="hidden lg:flex gap-2">
             <Select value={category} onValueChange={(v) => setCategory(v ?? '')}>
-              <SelectTrigger className="w-48 bg-white/5 border-white/10">
+              <SelectTrigger className="w-48 bg-white border-border text-foreground">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
-              <SelectContent className="glass-strong border-white/10">
+              <SelectContent className="bg-white border-border shadow-md">
                 <SelectItem value="all">All categories</SelectItem>
                 {CATEGORIES.map((cat) => (
                   <SelectItem key={cat} value={cat}>{cat}</SelectItem>
@@ -272,10 +272,10 @@ function ExploreContent() {
               </SelectContent>
             </Select>
             <Select value={sortBy} onValueChange={(v) => setSortBy(v ?? '')}>
-              <SelectTrigger className="w-44 bg-white/5 border-white/10">
+              <SelectTrigger className="w-44 bg-white border-border text-foreground">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="glass-strong border-white/10">
+              <SelectContent className="bg-white border-border shadow-md">
                 <SelectItem value="newest">Newest</SelectItem>
                 <SelectItem value="rate_low">Price: Low→High</SelectItem>
                 <SelectItem value="rate_high">Price: High→Low</SelectItem>
@@ -286,13 +286,13 @@ function ExploreContent() {
           {/* Mobile filter sheet */}
           <Sheet>
             <SheetTrigger>
-              <Button variant="outline" size="icon" className="lg:hidden border-white/10 h-11 w-11">
+              <Button variant="outline" size="icon" className="lg:hidden border-border h-11 w-11 bg-white text-foreground">
                 <SlidersHorizontal className="w-4 h-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="glass-strong border-white/10">
+            <SheetContent className="bg-white border-border shadow-lg">
               <SheetHeader>
-                <SheetTitle>Filters</SheetTitle>
+                <SheetTitle className="text-foreground">Filters</SheetTitle>
               </SheetHeader>
               <div className="mt-6">
                 <FilterPanel
@@ -310,7 +310,7 @@ function ExploreContent() {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="glass-card rounded-xl p-5 space-y-4">
+              <div key={i} className="bg-white border border-border shadow-sm rounded-xl p-5 space-y-4">
                 <div className="flex items-center gap-3">
                   <Skeleton className="w-12 h-12 rounded-full" />
                   <div className="flex-1 space-y-2">
@@ -333,12 +333,12 @@ function ExploreContent() {
             animate={{ opacity: 1 }}
             className="text-center py-24"
           >
-            <div className="w-20 h-20 rounded-2xl bg-white/5 flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-6">
               <Search className="w-8 h-8 text-muted-foreground" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">No students found</h3>
+            <h3 className="text-xl font-semibold mb-2 text-foreground">No students found</h3>
             <p className="text-muted-foreground mb-6">Try adjusting your search or filters</p>
-            <Button variant="outline" className="border-white/10" onClick={() => { setSearchQuery(''); setCategory('all'); }}>
+            <Button variant="outline" className="border-border text-foreground hover:bg-muted" onClick={() => { setSearchQuery(''); setCategory('all'); }}>
               Clear all filters
             </Button>
           </motion.div>

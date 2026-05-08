@@ -120,8 +120,8 @@ export default function MessagesPage() {
     return (
       <div className="max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Messages</h1>
-        <div className="glass-card rounded-xl h-[600px] flex">
-          <div className="w-80 border-r border-white/5 p-4 space-y-3">
+        <div className="bg-white border border-border shadow-sm rounded-xl h-[600px] flex">
+          <div className="w-80 border-r border-border p-4 space-y-3">
             {[1,2,3].map(i => <Skeleton key={i} className="h-16 rounded-lg" />)}
           </div>
         </div>
@@ -132,13 +132,13 @@ export default function MessagesPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">Messages</h1>
-      <div className="glass-card rounded-xl h-[calc(100vh-220px)] min-h-[500px] flex overflow-hidden border border-white/10">
+      <div className="bg-white border border-border shadow-sm rounded-xl h-[calc(100vh-220px)] min-h-[500px] flex overflow-hidden">
         {/* Conversations List */}
-        <div className={`w-full sm:w-80 border-r border-white/5 flex flex-col shrink-0 ${selectedConv ? 'hidden sm:flex' : 'flex'}`}>
-          <div className="p-3 border-b border-white/5">
+        <div className={`w-full sm:w-80 border-r border-border flex flex-col shrink-0 ${selectedConv ? 'hidden sm:flex' : 'flex'}`}>
+          <div className="p-3 border-b border-border">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search conversations..." className="pl-9 bg-white/5 border-white/10 h-9 text-sm" />
+              <Input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search conversations..." className="pl-9 bg-white border-border h-9 text-sm" />
             </div>
           </div>
           <ScrollArea className="flex-1">
@@ -154,17 +154,17 @@ export default function MessagesPage() {
                 const isActive = selectedConv?.id === conv.id;
                 return (
                   <button key={conv.id} onClick={() => selectConversation(conv)}
-                    className={`w-full flex items-center gap-3 p-3 text-left hover:bg-white/5 transition-colors ${isActive ? 'bg-white/5' : ''}`}
+                    className={`w-full flex items-center gap-3 p-3 text-left hover:bg-muted transition-colors ${isActive ? 'bg-muted' : ''}`}
                   >
                     <Avatar className="w-10 h-10 shrink-0">
                       <AvatarImage src={other.avatar_url || ''} />
-                      <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+                      <AvatarFallback className="bg-primary text-xs text-white">
                         {getInitials(other.full_name || 'U')}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium truncate">{other.full_name}</p>
+                        <p className="text-sm font-medium truncate text-foreground">{other.full_name}</p>
                         <span className="text-[10px] text-muted-foreground shrink-0">{formatRelativeTime(conv.last_message_at)}</span>
                       </div>
                       <p className="text-xs text-muted-foreground truncate">{conv.last_message || 'Start a conversation'}</p>
@@ -181,18 +181,18 @@ export default function MessagesPage() {
           {selectedConv && otherProfile ? (
             <>
               {/* Chat Header */}
-              <div className="flex items-center gap-3 p-4 border-b border-white/5">
+              <div className="flex items-center gap-3 p-4 border-b border-border">
                 <Button variant="ghost" size="icon" className="sm:hidden" onClick={() => setSelectedConv(null)}>
                   <ArrowLeft className="w-4 h-4" />
                 </Button>
                 <Avatar className="w-8 h-8">
                   <AvatarImage src={otherProfile.avatar_url || ''} />
-                  <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+                  <AvatarFallback className="bg-primary text-xs text-white">
                     {getInitials(otherProfile.full_name || 'U')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium">{otherProfile.full_name}</p>
+                  <p className="text-sm font-medium text-foreground">{otherProfile.full_name}</p>
                   <p className="text-[10px] text-muted-foreground">@{otherProfile.username}</p>
                 </div>
               </div>
@@ -206,8 +206,8 @@ export default function MessagesPage() {
                       <div key={msg.id} className={`flex ${isMine ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[70%] px-4 py-2.5 rounded-2xl text-sm ${
                           isMine
-                            ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-br-md'
-                            : 'bg-white/5 text-foreground rounded-bl-md'
+                            ? 'bg-primary text-white rounded-br-md'
+                            : 'bg-muted text-foreground rounded-bl-md'
                         }`}>
                           <p>{msg.content}</p>
                           <p className={`text-[10px] mt-1 ${isMine ? 'text-white/60' : 'text-muted-foreground'}`}>
@@ -222,11 +222,11 @@ export default function MessagesPage() {
               </ScrollArea>
 
               {/* Input */}
-              <form onSubmit={handleSend} className="p-4 border-t border-white/5 flex gap-2">
+              <form onSubmit={handleSend} className="p-4 border-t border-border flex gap-2">
                 <Input value={newMessage} onChange={e => setNewMessage(e.target.value)}
-                  placeholder="Type a message..." className="bg-white/5 border-white/10 flex-1" />
+                  placeholder="Type a message..." className="bg-white border-border flex-1" />
                 <Button type="submit" size="icon" disabled={!newMessage.trim() || sending}
-                  className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0 shrink-0">
+                  className="bg-primary hover:bg-primary/90 text-white border-0 shrink-0">
                   <Send className="w-4 h-4" />
                 </Button>
               </form>

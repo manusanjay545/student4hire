@@ -134,35 +134,35 @@ export default function PortfolioManager() {
           if (!open) resetForm();
         }}>
           <DialogTrigger>
-            <Button className="bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white gap-2 border-0 shadow-lg shadow-violet-500/20">
+            <Button className="bg-primary hover:bg-primary/90 text-white font-semibold gap-2 shadow-sm">
               <Plus className="w-4 h-4" /> Add Project
             </Button>
           </DialogTrigger>
-          <DialogContent className="glass-strong border-white/10 sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+          <DialogContent className="bg-white border-border shadow-lg sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle>{editingId ? 'Edit Project' : 'Add New Project'}</DialogTitle>
+              <DialogTitle className="text-foreground">{editingId ? 'Edit Project' : 'Add New Project'}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-4">
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Project Title *</label>
-                <Input required value={title} onChange={(e) => setTitle(e.target.value)} className="bg-white/5 border-white/10" placeholder="e.g. E-commerce Website Design" />
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Project Title *</label>
+                <Input required value={title} onChange={(e) => setTitle(e.target.value)} className="bg-white border-border" placeholder="e.g. E-commerce Website Design" />
               </div>
               
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Category *</label>
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Category *</label>
                 <Select required value={category} onValueChange={(v) => setCategory(v ?? '')}>
-                  <SelectTrigger className="bg-white/5 border-white/10">
+                  <SelectTrigger className="bg-white border-border">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
-                  <SelectContent className="glass-strong border-white/10">
+                  <SelectContent className="bg-white border-border">
                     {CATEGORIES.map(cat => <SelectItem key={cat} value={cat}>{cat}</SelectItem>)}
                   </SelectContent>
                 </Select>
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Image</label>
-                <div className="border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:bg-white/5 transition-colors cursor-pointer relative">
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Image</label>
+                <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:bg-muted transition-colors cursor-pointer relative">
                   <input
                     type="file"
                     accept="image/*"
@@ -177,23 +177,23 @@ export default function PortfolioManager() {
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Description</label>
-                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} className="bg-white/5 border-white/10 min-h-[100px]" placeholder="Describe what you built and your role..." />
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Description</label>
+                <Textarea value={description} onChange={(e) => setDescription(e.target.value)} className="bg-white border-border min-h-[100px]" placeholder="Describe what you built and your role..." />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Tags (comma separated)</label>
-                <Input value={tags} onChange={(e) => setTags(e.target.value)} className="bg-white/5 border-white/10" placeholder="React, Tailwind, Node.js" />
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Tags (comma separated)</label>
+                <Input value={tags} onChange={(e) => setTags(e.target.value)} className="bg-white border-border" placeholder="React, Tailwind, Node.js" />
               </div>
 
               <div>
-                <label className="text-sm font-medium mb-1.5 block">Live Project Link</label>
-                <Input type="url" value={projectLink} onChange={(e) => setProjectLink(e.target.value)} className="bg-white/5 border-white/10" placeholder="https://..." />
+                <label className="text-sm font-medium mb-1.5 block text-foreground">Live Project Link</label>
+                <Input type="url" value={projectLink} onChange={(e) => setProjectLink(e.target.value)} className="bg-white border-border" placeholder="https://..." />
               </div>
 
               <div className="pt-4 flex justify-end gap-3">
-                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="border-white/10">Cancel</Button>
-                <Button type="submit" disabled={submitting} className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0">
+                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="border-border bg-white text-foreground hover:bg-muted">Cancel</Button>
+                <Button type="submit" disabled={submitting} className="bg-primary hover:bg-primary/90 text-white font-semibold">
                   {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : editingId ? 'Save Changes' : 'Publish Project'}
                 </Button>
               </div>
@@ -203,11 +203,11 @@ export default function PortfolioManager() {
       </div>
 
       {projects.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center border-dashed border-2 border-white/10">
+        <div className="bg-white border border-border shadow-sm rounded-2xl p-12 text-center border-dashed border-2">
           <ImageIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
-          <h3 className="text-lg font-semibold mb-2">No projects yet</h3>
+          <h3 className="text-lg font-semibold mb-2 text-foreground">No projects yet</h3>
           <p className="text-muted-foreground mb-6">Upload your best work to attract clients.</p>
-          <Button onClick={() => setIsDialogOpen(true)} className="bg-white/10 hover:bg-white/20 text-white">
+          <Button onClick={() => setIsDialogOpen(true)} className="bg-primary hover:bg-primary/90 text-white">
             Add Your First Project
           </Button>
         </div>
@@ -219,14 +219,14 @@ export default function PortfolioManager() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="glass-card rounded-xl overflow-hidden group border border-white/10"
+              className="bg-white border border-border shadow-sm rounded-xl overflow-hidden group"
             >
-              <div className="aspect-video bg-black/40 relative">
+              <div className="aspect-video bg-muted relative">
                 {project.images?.[0] ? (
                   <img src={project.images[0]} alt={project.title} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <ImageIcon className="w-8 h-8 text-white/20" />
+                    <ImageIcon className="w-8 h-8 text-muted-foreground/20" />
                   </div>
                 )}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
@@ -239,10 +239,10 @@ export default function PortfolioManager() {
                 </div>
               </div>
               <div className="p-4">
-                <div className="text-xs text-violet-400 mb-1">{project.category}</div>
-                <h3 className="font-semibold truncate mb-2">{project.title}</h3>
+                <div className="text-xs text-primary font-semibold mb-1">{project.category}</div>
+                <h3 className="font-semibold truncate mb-2 text-foreground">{project.title}</h3>
                 {project.project_link && (
-                  <a href={project.project_link} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground hover:text-white flex items-center gap-1">
+                  <a href={project.project_link} target="_blank" rel="noreferrer" className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1">
                     <ExternalLink className="w-3 h-3" /> View Live
                   </a>
                 )}

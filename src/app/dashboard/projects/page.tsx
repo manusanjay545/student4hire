@@ -14,10 +14,10 @@ import type { ClientProject } from '@/types/database';
 import { CATEGORIES, SKILLS } from '@/types/database';
 
 const statusColors: Record<string, string> = {
-  open: 'bg-green-500/10 text-green-400 border-green-500/20',
-  in_progress: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-  completed: 'bg-violet-500/10 text-violet-400 border-violet-500/20',
-  cancelled: 'bg-red-500/10 text-red-400 border-red-500/20',
+  open: 'bg-green-500/10 text-green-500 border-green-500/20',
+  in_progress: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
+  completed: 'bg-primary/10 text-primary border-primary/20',
+  cancelled: 'bg-red-500/10 text-red-500 border-red-500/20',
 };
 
 export default function ProjectsPage() {
@@ -81,48 +81,48 @@ export default function ProjectsPage() {
     <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex justify-between items-start gap-4">
         <div>
-          <h1 className="text-3xl font-bold">My Projects</h1>
+          <h1 className="text-3xl font-bold text-foreground">My Projects</h1>
           <p className="text-muted-foreground mt-1">Post and manage your project listings.</p>
         </div>
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger>
-            <Button className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0 gap-2 shadow-lg shadow-violet-500/20">
+            <Button className="bg-primary hover:bg-primary/90 text-white font-semibold gap-2 shadow-sm">
               <Plus className="w-4 h-4" /> Post Project
             </Button>
           </DialogTrigger>
-          <DialogContent className="glass-strong border-white/10 sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-            <DialogHeader><DialogTitle>Post a New Project</DialogTitle></DialogHeader>
+          <DialogContent className="bg-white border-border shadow-lg sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+            <DialogHeader><DialogTitle className="text-foreground">Post a New Project</DialogTitle></DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4 mt-2">
-              <div><label className="text-sm font-medium mb-1.5 block">Title *</label>
-                <Input required value={title} onChange={e => setTitle(e.target.value)} className="bg-white/5 border-white/10" placeholder="e.g. Build a landing page" /></div>
-              <div><label className="text-sm font-medium mb-1.5 block">Description *</label>
-                <Textarea required value={description} onChange={e => setDescription(e.target.value)} className="bg-white/5 border-white/10 min-h-[100px]" placeholder="Describe your project in detail..." /></div>
+              <div><label className="text-sm font-medium mb-1.5 block text-foreground">Title *</label>
+                <Input required value={title} onChange={e => setTitle(e.target.value)} className="bg-white border-border" placeholder="e.g. Build a landing page" /></div>
+              <div><label className="text-sm font-medium mb-1.5 block text-foreground">Description *</label>
+                <Textarea required value={description} onChange={e => setDescription(e.target.value)} className="bg-white border-border min-h-[100px]" placeholder="Describe your project in detail..." /></div>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="text-sm font-medium mb-1.5 block">Budget (USD)</label>
-                  <Input type="number" value={budget} onChange={e => setBudget(e.target.value)} className="bg-white/5 border-white/10" placeholder="500" /></div>
-                <div><label className="text-sm font-medium mb-1.5 block">Category *</label>
+                <div><label className="text-sm font-medium mb-1.5 block text-foreground">Budget (USD)</label>
+                  <Input type="number" value={budget} onChange={e => setBudget(e.target.value)} className="bg-white border-border" placeholder="500" /></div>
+                <div><label className="text-sm font-medium mb-1.5 block text-foreground">Category *</label>
                   <Select required value={category} onValueChange={(v) => setCategory(v ?? '')}>
-                    <SelectTrigger className="bg-white/5 border-white/10"><SelectValue placeholder="Select" /></SelectTrigger>
-                    <SelectContent className="glass-strong border-white/10">
+                    <SelectTrigger className="bg-white border-border"><SelectValue placeholder="Select" /></SelectTrigger>
+                    <SelectContent className="bg-white border-border">
                       {CATEGORIES.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                     </SelectContent>
                   </Select></div>
               </div>
-              <div><label className="text-sm font-medium mb-1.5 block">Skills Required</label>
+              <div><label className="text-sm font-medium mb-1.5 block text-foreground">Skills Required</label>
                 <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto scrollbar-thin">
                   {SKILLS.slice(0, 20).map(s => (
                     <button key={s} type="button" onClick={() => toggleSkill(s)}
                       className={`px-2.5 py-1 rounded-md text-xs transition-all ${skillsRequired.includes(s)
-                        ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30'
-                        : 'bg-white/5 text-muted-foreground border border-white/10'}`}>
+                        ? 'bg-primary/10 text-primary border border-primary/30 font-medium'
+                        : 'bg-muted text-muted-foreground border border-border hover:bg-gray-200'}`}>
                       {s}
                     </button>
                   ))}
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-2">
-                <Button type="button" variant="outline" className="border-white/10" onClick={() => setIsOpen(false)}>Cancel</Button>
-                <Button type="submit" disabled={submitting} className="bg-gradient-to-r from-violet-600 to-cyan-600 text-white border-0">
+                <Button type="button" variant="outline" className="border-border bg-white text-foreground hover:bg-muted" onClick={() => setIsOpen(false)}>Cancel</Button>
+                <Button type="submit" disabled={submitting} className="bg-primary hover:bg-primary/90 text-white font-semibold border-0">
                   {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Post Project'}
                 </Button>
               </div>
@@ -132,18 +132,18 @@ export default function ProjectsPage() {
       </div>
 
       {projects.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center border-dashed border-2 border-white/10">
+        <div className="bg-white border border-border shadow-sm rounded-2xl p-12 text-center border-dashed border-2">
           <Briefcase className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
-          <h3 className="text-lg font-semibold mb-2">No projects posted</h3>
+          <h3 className="text-lg font-semibold mb-2 text-foreground">No projects posted</h3>
           <p className="text-muted-foreground mb-6">Post your first project to find talented students.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {projects.map(project => (
-            <div key={project.id} className="glass-card rounded-xl p-5 flex flex-col sm:flex-row gap-4 group">
+            <div key={project.id} className="bg-white border border-border shadow-sm rounded-xl p-5 flex flex-col sm:flex-row gap-4 group hover:shadow-md transition-all">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
-                  <h3 className="font-semibold">{project.title}</h3>
+                  <h3 className="font-semibold text-foreground">{project.title}</h3>
                   <Badge className={statusColors[project.status]}>{project.status.replace('_', ' ')}</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{project.description}</p>
@@ -154,10 +154,10 @@ export default function ProjectsPage() {
                 </div>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground">
                   <span>{project.category}</span>
-                  {project.budget > 0 && <span className="text-violet-400 font-semibold">${project.budget}</span>}
+                  {project.budget > 0 && <span className="text-primary font-semibold">${project.budget}</span>}
                 </div>
               </div>
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-red-400 opacity-0 group-hover:opacity-100 shrink-0"
+              <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-red-50 hover:text-red-500 opacity-0 group-hover:opacity-100 shrink-0"
                 onClick={() => deleteProject(project.id)}>
                 <Trash2 className="w-4 h-4" />
               </Button>

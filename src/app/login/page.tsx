@@ -58,11 +58,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(139,92,246,0.12)_0%,_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(6,182,212,0.08)_0%,_transparent_50%)]" />
-
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-muted/30">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -70,15 +66,15 @@ function LoginForm() {
         className="relative w-full max-w-md"
       >
         {/* Card */}
-        <div className="glass-card rounded-2xl p-8 space-y-6">
+        <div className="bg-white border border-border shadow-sm rounded-xl p-8 space-y-6">
           {/* Logo */}
           <div className="text-center">
             <Link href="/" className="inline-flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
             </Link>
-            <h1 className="text-2xl font-bold mb-2">Welcome back</h1>
+            <h1 className="text-2xl font-bold mb-2 text-foreground">Welcome back</h1>
             <p className="text-sm text-muted-foreground">
               Sign in to your Studentlance account
             </p>
@@ -93,7 +89,7 @@ function LoginForm() {
                   {...register('email')}
                   type="email"
                   placeholder="Email address"
-                  className="pl-10 h-11 bg-white/5 border-white/10"
+                  className="pl-10 h-11 bg-white border-border"
                 />
               </div>
               {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email.message}</p>}
@@ -106,12 +102,12 @@ function LoginForm() {
                   {...register('password')}
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
-                  className="pl-10 pr-10 h-11 bg-white/5 border-white/10"
+                  className="pl-10 pr-10 h-11 bg-white border-border"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -128,7 +124,7 @@ function LoginForm() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-11 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white border-0"
+              className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-semibold"
             >
               {loading ? (
                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -139,10 +135,10 @@ function LoginForm() {
 
             <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-[#0b0a16] px-2 text-muted-foreground">Or continue with</span>
+                <span className="bg-white px-2 text-muted-foreground font-medium">Or continue with</span>
               </div>
             </div>
 
@@ -151,7 +147,7 @@ function LoginForm() {
               variant="outline"
               disabled={loading}
               onClick={handleGoogleSignIn}
-              className="w-full h-11 bg-white/5 border-white/10 hover:bg-white/10 text-white"
+              className="w-full h-11 bg-white border-border hover:bg-muted text-foreground font-semibold"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 mr-2" aria-hidden="true">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -165,7 +161,7 @@ function LoginForm() {
 
           <p className="text-sm text-center text-muted-foreground">
             Don&apos;t have an account?{' '}
-            <Link href="/signup" className="text-violet-400 hover:text-violet-300 font-medium">
+            <Link href="/signup" className="text-primary hover:underline font-medium">
               Sign up
             </Link>
           </p>
@@ -177,7 +173,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-violet-500/30 border-t-violet-500 rounded-full animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" /></div>}>
       <LoginForm />
     </Suspense>
   );

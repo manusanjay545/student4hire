@@ -41,34 +41,34 @@ export default function SavedProfilesPage() {
   return (
     <div className="max-w-5xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Saved Profiles</h1>
+        <h1 className="text-3xl font-bold text-foreground">Saved Profiles</h1>
         <p className="text-muted-foreground mt-1">Your favorited student profiles for quick access.</p>
       </div>
 
       {saved.length === 0 ? (
-        <div className="glass-card rounded-2xl p-12 text-center border-dashed border-2 border-white/10">
+        <div className="bg-white border border-border shadow-sm rounded-2xl p-12 text-center border-dashed border-2">
           <Heart className="w-12 h-12 mx-auto mb-4 text-muted-foreground/30" />
-          <h3 className="text-lg font-semibold mb-2">No saved profiles</h3>
+          <h3 className="text-lg font-semibold mb-2 text-foreground">No saved profiles</h3>
           <p className="text-muted-foreground mb-6">Browse students and save your favorites.</p>
-          <Link href="/explore"><Button className="bg-white/10 hover:bg-white/20">Explore Students</Button></Link>
+          <Link href="/explore"><Button className="bg-primary hover:bg-primary/90 text-white font-semibold">Explore Students</Button></Link>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {saved.map(({ student }) => (
-            <div key={student.id} className="glass-card rounded-xl p-5 group relative">
-              <button onClick={() => removeSaved(student.id)} className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300">
+            <div key={student.id} className="bg-white border border-border shadow-sm rounded-xl p-5 group relative hover:shadow-md transition-all">
+              <button onClick={() => removeSaved(student.id)} className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-400">
                 <Heart className="w-4 h-4 fill-current" />
               </button>
               <Link href={`/profile/${student.username}`}>
                 <div className="flex items-center gap-3 mb-3">
                   <Avatar className="w-11 h-11">
                     <AvatarImage src={student.avatar_url || ''} />
-                    <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+                    <AvatarFallback className="bg-primary text-xs text-white">
                       {getInitials(student.full_name)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="min-w-0">
-                    <h3 className="text-sm font-semibold truncate">{student.full_name}</h3>
+                    <h3 className="text-sm font-semibold truncate text-foreground">{student.full_name}</h3>
                     <p className="text-xs text-muted-foreground">@{student.username}</p>
                   </div>
                 </div>
@@ -78,9 +78,9 @@ export default function SavedProfilesPage() {
                     <Badge key={s} variant="secondary" className="text-[10px]">{s}</Badge>
                   ))}
                 </div>
-                <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-white/5">
+                <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-border">
                   {student.location && <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{student.location}</span>}
-                  {student.hourly_rate > 0 && <span className="text-violet-400 font-semibold">${student.hourly_rate}/hr</span>}
+                  {student.hourly_rate > 0 && <span className="text-primary font-semibold">${student.hourly_rate}/hr</span>}
                 </div>
               </Link>
             </div>

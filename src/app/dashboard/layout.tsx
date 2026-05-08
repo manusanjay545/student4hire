@@ -51,15 +51,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col border-r border-white/5 bg-card/50 backdrop-blur-xl shrink-0 fixed inset-y-0 left-0 z-30">
+      <aside className="hidden lg:flex w-64 flex-col border-r border-border bg-white shrink-0 fixed inset-y-0 left-0 z-30">
         {/* Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-white/5">
+        <div className="h-16 flex items-center px-6 border-b border-border">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </div>
-            <span className="text-sm font-bold">
-              Student<span className="gradient-text">lance</span>
+            <span className="text-sm font-bold text-foreground">
+              Student<span className="text-primary">lance</span>
             </span>
           </Link>
         </div>
@@ -75,8 +75,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   href={link.href}
                   className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-200 ${
                     isActive
-                      ? 'bg-violet-500/10 text-violet-300 font-medium'
-                      : 'text-muted-foreground hover:text-white hover:bg-white/5'
+                      ? 'bg-primary/10 text-primary font-medium'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                   }`}
                 >
                   <link.icon className="w-4 h-4 shrink-0" />
@@ -88,16 +88,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </ScrollArea>
 
         {/* User */}
-        <div className="p-4 border-t border-white/5">
+        <div className="p-4 border-t border-border">
           <div className="flex items-center gap-3 mb-3">
             <Avatar className="w-9 h-9">
               <AvatarImage src={profile?.avatar_url || ''} />
-              <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+              <AvatarFallback className="bg-primary text-xs text-white">
                 {getInitials(profile?.full_name || 'U')}
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-medium truncate">{profile?.full_name}</p>
+              <p className="text-sm font-medium truncate text-foreground">{profile?.full_name}</p>
               <p className="text-xs text-muted-foreground truncate capitalize">{profile?.role}</p>
             </div>
           </div>
@@ -113,9 +113,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </aside>
 
       {/* Mobile Top Bar */}
-      <div className="lg:hidden fixed top-0 inset-x-0 h-14 glass-strong border-b border-white/5 z-30 flex items-center justify-between px-4">
+      <div className="lg:hidden fixed top-0 inset-x-0 h-14 bg-white border-b border-border shadow-sm z-30 flex items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center">
+          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
             <Sparkles className="w-3.5 h-3.5 text-white" />
           </div>
           <span className="text-sm font-bold">Studentlance</span>
@@ -123,7 +123,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Link href="/dashboard/settings">
           <Avatar className="w-8 h-8">
             <AvatarImage src={profile?.avatar_url || ''} />
-            <AvatarFallback className="bg-gradient-to-br from-violet-600 to-cyan-600 text-xs text-white">
+            <AvatarFallback className="bg-primary text-xs text-white">
               {getInitials(profile?.full_name || 'U')}
             </AvatarFallback>
           </Avatar>
@@ -131,7 +131,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </div>
 
       {/* Mobile Bottom Nav */}
-      <div className="lg:hidden fixed bottom-0 inset-x-0 glass-strong border-t border-white/5 z-30">
+      <div className="lg:hidden fixed bottom-0 inset-x-0 bg-white border-t border-border z-30">
         <nav className="flex items-center justify-around py-2">
           {links.slice(0, 5).map((link) => {
             const isActive = pathname === link.href;
@@ -140,7 +140,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 key={link.href}
                 href={link.href}
                 className={`flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg transition-colors ${
-                  isActive ? 'text-violet-400' : 'text-muted-foreground'
+                  isActive ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >
                 <link.icon className="w-5 h-5" />
