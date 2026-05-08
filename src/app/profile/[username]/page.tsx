@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import {
   MapPin, Globe, Mail, Star, Calendar, Clock,
   Heart, MessageSquare, ExternalLink, Play, X, ChevronLeft, ChevronRight,
-  CheckCircle, Briefcase,
+  CheckCircle, Briefcase, Trash2, AlertTriangle, Loader2
 } from 'lucide-react';
 
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (<svg viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>);
@@ -91,8 +91,9 @@ function ReviewCard({ review }: { review: Review }) {
 /* ─── Profile Page ─── */
 export default function ProfilePage() {
   const params = useParams();
+  const router = useRouter();
   const username = params.username as string;
-  const { user, profile: currentUserProfile } = useAuthStore();
+  const { user, profile: currentUserProfile, setSession } = useAuthStore();
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [portfolio, setPortfolio] = useState<PortfolioProject[]>([]);
@@ -102,6 +103,8 @@ export default function ProfilePage() {
   const [isSaved, setIsSaved] = useState(false);
   const [hireMessage, setHireMessage] = useState('');
   const [sending, setSending] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -172,6 +175,28 @@ export default function ProfilePage() {
     });
     setSending(false);
     setHireMessage('');
+  };
+
+  const handleDeleteAccount = async () => {
+    setDeleting(true);
+    try {
+      const res = await fetch('/api/user/delete', { method: 'DELETE' });
+      if (res.ok) {
+        const supabase = createClient();
+        await supabase.auth.signOut();
+        setSession(null);
+        router.push('/');
+        router.refresh();
+      } else {
+        const data = await res.json();
+        alert(data.error || 'Failed to delete account.');
+      }
+    } catch (error) {
+      alert('An error occurred while deleting your account.');
+    } finally {
+      setDeleting(false);
+      setShowDeleteDialog(false);
+    }
   };
 
   const avgRating = reviews.length > 0
@@ -289,6 +314,37 @@ export default function ProfilePage() {
                   {isSaved ? 'Saved' : 'Save'}
                 </Button>
               </>
+            )}
+
+            {user && user.id === profile.id && (
+              <Dialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
+                <DialogTrigger asChild>
+                  <Button variant="destructive" className="bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white border-0 gap-2 mb-2 w-full sm:w-auto">
+                    <Trash2 className="w-4 h-4" /> Delete Account
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="glass-strong border-white/10 max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-red-500 flex items-center gap-2">
+                      <AlertTriangle className="w-5 h-5" /> Danger Zone
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 pt-4">
+                    <p className="text-sm text-muted-foreground">
+                      Are you absolutely sure you want to delete your account? This action <strong>cannot</strong> be undone. All your profile data, projects, messages, and reviews will be permanently deleted from the database.
+                    </p>
+                    <div className="flex justify-end gap-3 pt-4">
+                      <Button variant="outline" onClick={() => setShowDeleteDialog(false)} disabled={deleting}>
+                        Cancel
+                      </Button>
+                      <Button variant="destructive" onClick={handleDeleteAccount} disabled={deleting} className="gap-2">
+                        {deleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+                        Yes, Delete My Account
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             )}
 
             {/* Social Links */}
